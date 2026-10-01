@@ -536,6 +536,12 @@
     #viewPedidos .sums-card .sums{ flex-wrap:wrap; row-gap:14px !important; }
     #viewPedidos .sums-card .sums > div{ flex:1 1 40%; }
   }
+  .custo-row{ grid-template-columns:minmax(0,1fr) 130px 150px 36px; }
+  .custo-row .pc-data{ min-width:0; }
+  @media (max-width:899px){
+    .custo-row{ grid-template-columns:minmax(0,1fr) minmax(0,1fr) 36px; }
+    .custo-row .pc-cat{ grid-column:1 / -1; }
+  }
 
   .nav-logo{ -webkit-mask:url(data:image/png;base64,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) center/contain no-repeat; mask:url(data:image/png;base64,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) center/contain no-repeat; }
 
@@ -671,11 +677,11 @@
       </div>
       <div class="stack">
         <section class="sheet o2 fold" data-fold="receber">
-          <div class="shead"><h2>A receber</h2><span class="aside" id="aReceber">R$ 0,00</span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="shead"><h2 id="aReceberLabel">A receber</h2><span class="aside" id="aReceber">R$ 0,00</span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="inReceber"></div>
         </section>
         <section class="sheet o3 fold" data-fold="pagar" id="secPagar">
-          <div class="shead"><h2>A pagar</h2><span class="aside out" id="aPagar">R$ 0,00</span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+          <div class="shead"><h2 id="aPagarLabel">A pagar</h2><span class="aside out" id="aPagar">R$ 0,00</span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="inPagar"></div>
         </section>
         <section class="sheet o5 fold" data-fold="ultimos">
@@ -956,7 +962,7 @@
       </div>
     </div>
     <div class="field"><label for="pTotal">Valor total do pedido</label><input type="text" inputmode="decimal" class="money" id="pTotal" value="R$ 0,00"></div>
-    <div class="field"><label>Custos do pedido<span class="hint">o que vocês vão pagar pra produzir; cada custo vira uma saída no Caixa quando for pago</span></label>
+    <div class="field"><label>Custos do pedido<span class="hint">o que vocês vão pagar pra produzir e até quando; cada custo vira uma saída no Caixa quando for pago</span></label>
       <div class="custo-list" id="pCustos"></div>
       <button type="button" class="link-btn" id="pAddCusto" style="align-self:flex-start;">+ Adicionar custo</button>
     </div>
@@ -1382,7 +1388,7 @@
   // pedido conta como pagamento: primeiro as marcadas com o número do custo, depois pela categoria,
   // e o que sobrar preenche os custos em ordem.
   function custosInfo(p){
-    const lines = (Array.isArray(p.custos) ? p.custos : []).map((c,i) => ({ n:i+1, cat:c.cat||'Outros custos de produção', valor:+c.valor||0, pago:0 }));
+    const lines = (Array.isArray(p.custos) ? p.custos : []).map((c,i) => ({ n:i+1, cat:c.cat||'Outros custos de produção', valor:+c.valor||0, data:c.data||'', pago:0 }));
     const outs = lancs.filter(l => l.tipo==='saida' && l.pedidoId===p.id);
     let pool = [];
     outs.forEach(l => { const k = +l.parcela; if(k >= 1 && k <= lines.length) lines[k-1].pago += +l.valor||0; else pool.push(l); });
@@ -1405,7 +1411,7 @@
   function custoRow(o, comPedido){
     const { p, x } = o;
     return `<div class="row">
-      <div class="row-main"><span class="t">${esc(comPedido === false ? x.cat : pedName(p))}</span><span class="m">${comPedido === false ? '' : `<span>${esc(x.cat)}</span>`}${x.status==='part' ? `<span>pago ${money(x.pago)} de ${money(x.valor)}</span>` : x.status==='done' ? '<span class="in">pago</span>' : '<span>a pagar</span>'}</span></div>
+      <div class="row-main"><span class="t">${esc(comPedido === false ? x.cat : pedName(p))}</span><span class="m">${comPedido === false ? '' : `<span>${esc(x.cat)}</span>`}${x.status==='part' ? `<span>pago ${money(x.pago)} de ${money(x.valor)}</span>` : x.status==='done' ? '<span class="in">pago</span>' : '<span>a pagar</span>'}${x.status!=='done' && x.data ? (x.data < todayIso ? `<span class="out">venceu em ${ddmm(x.data)}</span>` : `<span>pagar até ${ddmm(x.data)}</span>`) : ''}</span></div>
       <div class="row-end"><b class="amt ${x.status==='done'?'':'out'}">${money(x.status==='done' ? x.valor : x.resta)}</b>${x.status==='done' || p.status==='cancelado' ? '' : `<button type="button" class="btn line small danger" data-pay-custo="${p.id}|${x.n}">Pagar</button>`}</div>
     </div>`;
   }
@@ -1426,29 +1432,29 @@
     </div>`;
   }
 
-  // Previsão do mês: o que ainda deve entrar dos pedidos (parcelas com data neste mês e,
-  // no mês atual, também as atrasadas) menos os custos que ainda estão a pagar.
-  // Cada custo pendente conta UMA vez só, no mês em que deve ser pago: o mês da primeira
-  // parcela que ainda falta receber do pedido (nunca antes do mês atual). Pedido sem parcela
-  // pendente, mas com custo a pagar, cai no mês atual.
+  // Previsão do mês. Cada valor pendente cai em UM mês só:
+  // - parcela a receber: no mês da data dela; atrasada ou sem data cai no mês atual;
+  // - custo a pagar: no mês da data de pagamento do custo; sem data, no mês da primeira
+  //   parcela que falta receber do pedido; vencido ou sem referência cai no mês atual.
+  function mesOuHoje(m){ const hoje = monthOf(todayIso); return (!m || m < hoje) ? hoje : m; }
+  function parcMes(x){ return mesOuHoje(monthOf(x.data)); }
   function custoMes(p){
-    const hoje = monthOf(todayIso); let mn = '';
+    let mn = '';
     pedInfo(p).parcs.forEach(x => { if(x.status === 'done') return; const mx = monthOf(x.data); if(mx && (!mn || mx < mn)) mn = mx; });
-    return (!mn || mn < hoje) ? hoje : mn;
+    return mesOuHoje(mn);
   }
+  function custoLinhaMes(p, x){ return x.data ? mesOuHoje(monthOf(x.data)) : custoMes(p); }
+  function parcsDoMes(m){ return pendingParcs().filter(o => parcMes(o.x) === m); }
+  function custosDoMes(m){ return pendingCustos().filter(o => custoLinhaMes(o.p, o.x) === m).sort((a,b)=>(a.x.data||'9999').localeCompare(b.x.data||'9999')); }
   function previsaoMes(m){
-    const atual = m === monthOf(todayIso);
-    let entrar = 0, custoFalta = 0; const peds = new Set();
-    pedidos.filter(p => p.status !== 'cancelado').forEach(p => {
-      pedInfo(p).parcs.forEach(x => {
-        if(x.status === 'done') return;
-        const mx = monthOf(x.data);
-        if(mx === m || (atual && x.status === 'late' && mx && mx < m)){ entrar += x.resta; peds.add(p); }
-      });
-      const cf = custoFaltaDe(p);
-      if(cf > 0.005 && custoMes(p) === m){ custoFalta += cf; peds.add(p); }
+    let entrar = 0, custoFalta = 0;
+    parcsDoMes(m).forEach(o => { entrar += o.x.resta; });
+    custosDoMes(m).forEach(o => { custoFalta += o.x.resta; });
+    // pedidos antigos sem lista de custos (só "custo previsto")
+    pedidos.filter(p => p.status !== 'cancelado' && !(Array.isArray(p.custos) && p.custos.length)).forEach(p => {
+      const cf = custoFaltaDe(p); if(cf > 0.005 && custoMes(p) === m) custoFalta += cf;
     });
-    return { entrar, custoFalta, n: peds.size };
+    return { entrar, custoFalta };
   }
   function renderPrevisao(r){
     const box = $('prevBox');
@@ -1467,17 +1473,19 @@
 
   function renderInicio(r, closed){
     renderPrevisao(r);
-    $('aReceber').textContent = money(aReceberTotal());
     if(!loaded.ped){ ['inReceber','inAndamento','inUltimos'].forEach(id => $(id).innerHTML = '<div class="empty">Carregando…</div>'); return; }
-    const cp = pendingCustos();
+    const cp = custosDoMes(cur);
     $('aPagar').textContent = money(cp.reduce((a,o)=>a+o.x.resta,0)); $('secPagar').classList.toggle('is-empty', !cp.length);
+    $('aPagarLabel').textContent = 'A pagar em ' + mesCurto(cur);
     $('inPagar').innerHTML = cp.length
       ? cp.slice(0,6).map(o => custoRow(o)).join('') + (cp.length > 6 ? `<button type="button" class="row more" data-goto="pedidos">Ver os outros ${cp.length-6} em Pedidos</button>` : '')
-      : '<div class="empty">Nenhum custo de pedido a pagar.</div>';
-    const pend = pendingParcs();
+      : '<div class="empty">Nada pra pagar neste mês.</div>';
+    const pend = parcsDoMes(cur);
+    $('aReceber').textContent = money(pend.reduce((a,o)=>a+o.x.resta,0));
+    $('aReceberLabel').textContent = 'A receber em ' + mesCurto(cur);
     $('inReceber').innerHTML = pend.length
       ? pend.slice(0,6).map(parcRow).join('') + (pend.length > 6 ? `<button type="button" class="row more" data-goto="pedidos">Ver as outras ${pend.length-6} em Pedidos</button>` : '')
-      : '<div class="empty">Nada pendente. Todo o dinheiro combinado já entrou.</div>';
+      : '<div class="empty">Nada pra receber neste mês.</div>';
     const and = pedidos.filter(p => p.status==='aprovado' || p.status==='producao').sort((a,b)=>(a.data||'').localeCompare(b.data||''));
     $('andCount').textContent = and.length ? and.length + (and.length===1 ? ' pedido' : ' pedidos') : '';
     $('inAndamento').innerHTML = and.length
@@ -1527,7 +1535,7 @@
     $('aReceber2').textContent = money(recTot);
     $('aPagar2').textContent = money(pagTot);
     $('sobraPrev').textContent = money(recTot - pagTot); $('sobraPrev').className = recTot - pagTot < 0 ? 'out' : 'in';
-    $('prevMes').textContent = money(previstoNoMes(cur));
+    $('prevMes').textContent = money(previsaoMes(cur).entrar);
     $('prevMesLabel').textContent = `Previsto pra entrar em ${mesCurto(cur)}`;
     $('pfMes').textContent = `Fechados em ${mesCurto(cur)}`;
     if(!loaded.ped){ box.innerHTML = '<div class="empty">Carregando…</div>'; $('pedPend').innerHTML = ''; return; }
@@ -1996,10 +2004,10 @@
   $('pTotal').addEventListener('input', updateParcVals);
   $('pTotal').addEventListener('blur', updateParcVals);
   function custoRowHtml(c){
-    return `<div class="custo-row"><select class="pc-cat" aria-label="Categoria do custo">${CAT_PROD.map(k=>`<option${k===c.cat?' selected':''}>${k}</option>`).join('')}</select><input type="text" inputmode="decimal" class="money pc-val" aria-label="Valor do custo" value="${money(+c.valor||0)}"><button type="button" class="icon-btn pc-del" aria-label="Remover custo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>`;
+    return `<div class="custo-row"><select class="pc-cat" aria-label="Categoria do custo">${CAT_PROD.map(k=>`<option${k===c.cat?' selected':''}>${k}</option>`).join('')}</select><input type="text" inputmode="decimal" class="money pc-val" aria-label="Valor do custo" value="${money(+c.valor||0)}"><input type="date" class="pc-data" aria-label="Pagar até" title="Pagar até" value="${esc(c.data||'')}"><button type="button" class="icon-btn pc-del" aria-label="Remover custo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>`;
   }
   function buildCustoRows(list){ $('pCustos').innerHTML = list.map(custoRowHtml).join(''); }
-  function readCustos(){ return [...document.querySelectorAll('#pCustos .custo-row')].map(r => ({ cat:r.querySelector('.pc-cat').value, valor:parseMoney(r.querySelector('.pc-val').value) })).filter(c => c.valor > 0); }
+  function readCustos(){ return [...document.querySelectorAll('#pCustos .custo-row')].map(r => ({ cat:r.querySelector('.pc-cat').value, valor:parseMoney(r.querySelector('.pc-val').value), data:r.querySelector('.pc-data').value || '' })).filter(c => c.valor > 0); }
   $('pAddCusto').addEventListener('click', () => { $('pCustos').insertAdjacentHTML('beforeend', custoRowHtml({ cat:'Confecção / malha', valor:0 })); const v = $('pCustos').querySelector('.custo-row:last-child .pc-val'); if(v) v.focus(); });
   $('pCustos').addEventListener('click', e => { const d = e.target.closest('.pc-del'); if(d) d.closest('.custo-row').remove(); });
   function openPed(p){
@@ -2232,7 +2240,7 @@
   const MAP = {
     pedidos: { table:'pedidos', key:'id',
       toRow: d => ({ cliente:d.cliente, cliente_id:d.clienteId||null, projeto:d.projeto||'', tipo:d.tipo, data:d.data, qtd:d.qtd||0, status:d.status, total:d.total, previsto:d.previsto||0, obs:d.obs||'', forma:d.forma||'avista', parcelas:d.parcelas||[], custos:d.custos||[], created_at: iso(d.createdAt) || undefined }),
-      fromRow: r => ({ id:r.id, cliente:r.cliente, clienteId:r.cliente_id||'', projeto:r.projeto, tipo:r.tipo, data:r.data, qtd:r.qtd, status:r.status, total:num(r.total), previsto:num(r.previsto), obs:r.obs, forma:r.forma, parcelas:(r.parcelas||[]).map(x=>({ pct:num(x.pct), data:x.data||'', st:x.st||undefined })), custos:(r.custos||[]).map(c=>({ cat:c.cat, valor:num(c.valor) })), createdAt:ms(r.created_at), criadoPor:r.criado_por }) },
+      fromRow: r => ({ id:r.id, cliente:r.cliente, clienteId:r.cliente_id||'', projeto:r.projeto, tipo:r.tipo, data:r.data, qtd:r.qtd, status:r.status, total:num(r.total), previsto:num(r.previsto), obs:r.obs, forma:r.forma, parcelas:(r.parcelas||[]).map(x=>({ pct:num(x.pct), data:x.data||'', st:x.st||undefined })), custos:(r.custos||[]).map(c=>({ cat:c.cat, valor:num(c.valor), data:c.data||'' })), createdAt:ms(r.created_at), criadoPor:r.criado_por }) },
     lancamentos: { table:'lancamentos', key:'id',
       toRow: d => ({ tipo:d.tipo, data:d.data, valor:d.valor, categoria:d.categoria||'', descricao:d.descricao||'', pedido_id:d.pedidoId||null, socio:d.socio||0, parcela:d.parcela||null, created_at: iso(d.createdAt) || undefined }),
       fromRow: r => ({ id:r.id, tipo:r.tipo, data:r.data, valor:num(r.valor), categoria:r.categoria, descricao:r.descricao, pedidoId:r.pedido_id||'', socio:r.socio, parcela:r.parcela||null, createdAt:ms(r.created_at), criadoPor:r.criado_por }) },
