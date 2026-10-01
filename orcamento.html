@@ -1,4 +1,27 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<style id="orc-mobile-v1">
+  .cli-toggle{ display:flex; align-items:center; justify-content:space-between; gap:10px; width:100%; border:none; background:none; color:inherit; font:inherit; padding:0; text-align:left; cursor:default; }
+  .cli-toggle svg{ display:none; }
+  @media (max-width:899px){
+    .card .note, .field .hint{ display:none !important; }
+    .grid-2 .field .hint{ display:block !important; }
+    .card .field{ margin-bottom:12px; }
+    .summary-grid{ grid-template-columns:1fr 1fr !important; column-gap:16px; }
+    .stat.total{ grid-column:span 2 !important; }
+    .stat .v{ font-size:18px; }
+    .stat .k{ font-size:12.5px; }
+    .stat.total .v{ font-size:30px; }
+    .cli-toggle{ cursor:pointer; }
+    .cli-toggle svg{ display:block; flex:none; color:var(--ink-soft); transition:transform .2s ease; }
+    .card.cli-open .cli-toggle svg{ transform:rotate(180deg); }
+    .card:not(.cli-open) .cli-dado{ display:none !important; }
+    .bottom:has(#salvarBtn){ display:grid !important; grid-template-columns:1fr 1fr; gap:10px !important; }
+    .bottom:has(#salvarBtn) > button{ width:100%; justify-content:center; margin:0; }
+    .bottom:has(#salvarBtn) > #salvarBtn:nth-last-child(3), .bottom:has(#salvarBtn) #downloadClienteBtn, .bottom:has(#salvarBtn) #downloadBtn{ grid-column:span 2; }
+    .bottom:has(#salvarBtn) > [hidden]{ display:none !important; }
+  }
+</style>
+</head><body>
 <title>Calculadora Arcano</title>
 <style>
   :root{
@@ -926,7 +949,7 @@
 
 <style>
   /* ===== Visual do sistema Financeiro Arcano (out/2026) — só a tela da calculadora ===== */
-  @font-face{ font-family:"Archivo"; font-style:normal; font-display:swap; font-weight:100 900; font-stretch:62% 125%; src:url(/archivo.woff2) format("woff2-variations"), url(/archivo.woff2) format("woff2"); }
+  @font-face{ font-family:"Archivo"; font-style:normal; font-display:swap; font-weight:100 900; font-stretch:62% 125%; src:url(archivo.woff2) format("woff2-variations"), url(archivo.woff2) format("woff2"); }
   :root{
     --ink:#000000; --ink-soft:#5E5E59; --page-bg:#F2F2EF; --card:#FFFFFF; --card-line:#E2E2DD; --row-bg:#F2F2EF;
     --green:#0E7A4E; --green-soft:#E2F1E9; --input-bg:#FFFFFF; --input-line:#CFCFC8; --danger:#B3261E; --radius:18px;
@@ -1116,7 +1139,7 @@
     </div>
 
     <hr class="divider">
-    <p class="section-label">Dados do orçamento para o cliente</p>
+    <p class="section-label"><button type="button" class="cli-toggle" id="cliToggle" aria-expanded="false">Dados do orçamento para o cliente<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button></p>
     <p class="note" style="margin:-6px 0 14px;">Essas informações aparecem na imagem do cliente e também no resumo interno — não afetam os cálculos.</p>
     <div class="grid-2">
       <div class="field">
@@ -2014,4 +2037,16 @@ el('historicoBtn').addEventListener('click', abrirHistorico);
 el('historicoClose').addEventListener('click', () => { el('historicoModal').hidden = true; });
 </script>
 
+
+<script>
+(function(){
+  var t = document.getElementById('cliToggle'); if(!t) return;
+  var label = t.closest('.section-label'), card = label.closest('.card');
+  for(var el = label.nextElementSibling; el; el = el.nextElementSibling) el.classList.add('cli-dado');
+  var mq = window.matchMedia('(max-width:899px)');
+  function set(open){ card.classList.toggle('cli-open', open); t.setAttribute('aria-expanded', String(open)); }
+  t.addEventListener('click', function(){ if(!mq.matches) return; set(!card.classList.contains('cli-open')); });
+  set(false);
+})();
+</script>
 </body></html>

@@ -5,18 +5,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>Financeiro Arcano</title>
-<link rel="manifest" href="/manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
-<link rel="icon" type="image/png" sizes="64x64" href="/icon-64.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="icon-64.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#000000">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Arcano">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<link rel="preload" href="/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="archivo.woff2" as="font" type="font/woff2" crossorigin>
 <style>
-  @font-face{ font-family:"Archivo"; font-style:normal; font-display:swap; font-weight:100 900; font-stretch:62% 125%; src:url(/archivo.woff2) format("woff2-variations"), url(/archivo.woff2) format("woff2"); }
+  @font-face{ font-family:"Archivo"; font-style:normal; font-display:swap; font-weight:100 900; font-stretch:62% 125%; src:url(archivo.woff2) format("woff2-variations"), url(archivo.woff2) format("woff2"); }
   :root{
     --paper:#F2F2EF; --sheet:#FFFFFF; --ink:#000000; --graphite:#5E5E59; --rule:#E2E2DD; --rule-strong:#BDBDB6;
     --in:#0E7A4E; --in-soft:#E2F1E9; --out:#B3261E; --out-soft:#F8E4E1; --wait:#9A6200; --wait-soft:#F6EBD3;
@@ -441,6 +441,102 @@
     #okFx.play, #okFx.play .okfx-badge{ animation-duration:.01s; } #okFx.play svg path{ animation:none; stroke-dashoffset:0; }
   }
 
+  /* ---------- celular: menos informação, seções recolhíveis ---------- */
+  .fold-ic{ display:none; }
+  .m-only{ display:none; }
+  @media (max-width:899px){
+    .m-only{ display:revert; }
+    .desk-only{ display:none !important; }
+    .home-grid{ align-items:stretch; }
+    .home-grid .sheet{ width:100%; }
+
+    /* cabeçalho que abre e fecha */
+    .fold > .shead{ cursor:pointer; align-items:center; flex-wrap:nowrap; gap:10px; margin:-4px -4px 0; padding:4px; border-radius:10px; -webkit-tap-highlight-color:transparent; }
+    .fold > .shead h2{ flex:1; min-width:0; }
+    .fold > .shead .aside{ font-size:15px; font-weight:700; white-space:nowrap; color:var(--graphite); }
+    .fold > .shead .aside.out{ color:var(--out); }
+    .fold > .shead #aReceber{ color:var(--ink); }
+    .fold > .shead .link-btn{ display:none; }
+    .fold > .shead .fold-ic{ display:block; flex:none; color:var(--graphite); transition:transform .2s ease; }
+    .fold.open > .shead .fold-ic{ transform:rotate(180deg); }
+    .fold > .shead:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+    .fold:not(.open) > :not(.shead){ display:none !important; }
+    .fold:not(.open){ padding-top:16px; padding-bottom:16px; }
+    .fold:not(.open) > .shead{ margin-bottom:-4px; }
+    .fold.open > .shead{ margin-bottom:8px; }
+    .fold.is-empty{ display:none; }
+    .fold > .shead .aside:empty{ display:none; }
+
+    /* Início */
+    .rc-foot .info, #infoCaixa{ display:none !important; }
+    .receipt .display{ font-size:44px; }
+
+    /* filtros numa linha só, rolando de lado */
+    .filters{ flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin-left:-16px; margin-right:-16px; padding:0 16px 2px; }
+    .filters::-webkit-scrollbar{ display:none; }
+    .chip-btn{ white-space:nowrap; flex:none; }
+
+    /* resumos em duas colunas, primeiro na tela */
+    .cols{ display:flex; flex-direction:column; }
+    .cols > aside{ display:flex; flex-direction:column; gap:16px; }
+    #viewCaixa .cols > aside{ display:contents; }
+    #viewCaixa .sums-card{ order:-1; }
+    .sums-card{ padding:16px; }
+    .sums-card .sums{ flex-direction:row !important; gap:12px !important; }
+    .sums-card .sums > div{ flex:1; min-width:0; }
+    .sums-card .sums .k{ font-size:12.5px; line-height:1.3; }
+    .sums-card .sums b{ font-size:19px; font-stretch:105%; white-space:nowrap; }
+
+    /* caixa: só os 8 mais recentes até pedir o resto */
+    #lancList:not(.all) > .row:nth-child(n+9):not(.more){ display:none; }
+    #lancList.all > .more{ display:none; }
+    .row.more{ justify-content:center; font-weight:700; font-size:14px; color:var(--ink); padding:14px 0 4px; text-decoration:underline; text-underline-offset:3px; }
+
+    /* fechamento empilhado e enxuto */
+    .cols-2.fech{ grid-template-columns:1fr; }
+    .lrow .k small, .caixa-acc .k small, .split .box .note, .ret-list, #fecharNote, #viewFech .actions > .info{ display:none !important; }
+    .lrow .k{ min-width:0; }
+    .lrow.total .v{ font-size:32px; }
+    #viewFech .shead{ align-items:center; }
+    #viewFech .shead #configBtn{ font-size:13px; }
+    .split .box .v{ font-size:26px; }
+    #viewFech .btn-row{ flex-direction:column; align-items:stretch; width:100%; }
+    #viewFech .btn-row .btn{ justify-content:center; }
+    #viewFech .actions{ width:100%; }
+
+    /* relatórios */
+    .chart-wrap{ overflow:visible; }
+    .chart-wrap svg, .chart-wrap svg[viewBox]{ min-width:0 !important; }
+    #infoInd, #viewRel .shead .info{ display:none !important; }
+    .stats .v{ font-size:22px; }
+
+    /* cabeçalhos das páginas */
+    .phead{ flex-wrap:wrap; gap:10px 12px; }
+    .phead .side{ flex-wrap:wrap; }
+  }
+  @media (max-width:899px){
+    .stage{ padding-bottom:96px; }
+    .cols{ align-items:stretch; }
+    .cols > section, .cols > aside, .cols .sheet{ width:100%; min-width:0; }
+    #lancList .row-main .m > span:nth-child(n+2), #inUltimos .row-main .m > span:nth-child(n+2){ display:none; }
+    .ped-row .row-end .note{ font-size:12px; white-space:nowrap; }
+    .ped-row .row-end .note .late-x{ display:none; }
+    .filters{ max-width:calc(100% + 32px); }
+  }
+  @media (max-width:899px){
+    #inReceber .row, #inPagar .row{ flex-wrap:wrap; }
+    #inReceber .row .row-main, #inPagar .row .row-main{ flex-basis:100%; }
+    #inReceber .row .row-end, #inPagar .row .row-end{ width:100%; justify-content:space-between; }
+    .receipt .display{ font-size:clamp(34px, 11.5vw, 46px); }
+    #tPrev{ font-size:clamp(19px, 6.4vw, 26px); }
+    .lrow.total .k{ font-size:16px; }
+    .lrow.total .v{ font-size:clamp(26px, 8.5vw, 34px); }
+  }
+  @media (max-width:899px){
+    #viewPedidos .sums-card .sums{ flex-wrap:wrap; row-gap:14px !important; }
+    #viewPedidos .sums-card .sums > div{ flex:1 1 40%; }
+  }
+
   .nav-logo{ -webkit-mask:url(data:image/png;base64,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) center/contain no-repeat; mask:url(data:image/png;base64,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) center/contain no-repeat; }
 
   /* ---- Cartão de exportação 1080x1920 (cores fixas, igual à calculadora) ---- */
@@ -568,22 +664,22 @@
           </div>
           <p class="info-text" id="infoCaixa" hidden>Cada valor conta no mês em que o dinheiro de fato entrou ou saiu da conta. Aporte e retirada de sócio não entram no lucro. O lucro previsto soma o que ainda deve entrar dos pedidos neste mês (incluindo parcelas atrasadas) e desconta os custos desses pedidos que ainda estão a pagar.</p>
         </section>
-        <section class="sheet o4">
-          <div class="shead"><h2>Em andamento</h2><button type="button" class="link-btn" data-goto="pedidos">Ver pedidos</button></div>
+        <section class="sheet o4 fold" data-fold="andamento">
+          <div class="shead"><h2>Em andamento</h2><button type="button" class="link-btn" data-goto="pedidos">Ver pedidos</button><span class="aside m-only" id="andCount"></span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="inAndamento"></div>
         </section>
       </div>
       <div class="stack">
-        <section class="sheet o2">
-          <div class="shead"><h2>A receber</h2><span class="aside" id="aReceber">R$ 0,00</span></div>
+        <section class="sheet o2 fold" data-fold="receber">
+          <div class="shead"><h2>A receber</h2><span class="aside" id="aReceber">R$ 0,00</span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="inReceber"></div>
         </section>
-        <section class="sheet o3">
-          <div class="shead"><h2>A pagar</h2><span class="aside out" id="aPagar">R$ 0,00</span></div>
+        <section class="sheet o3 fold" data-fold="pagar" id="secPagar">
+          <div class="shead"><h2>A pagar</h2><span class="aside out" id="aPagar">R$ 0,00</span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="inPagar"></div>
         </section>
-        <section class="sheet o5">
-          <div class="shead"><h2>Últimos lançamentos</h2><button type="button" class="link-btn" data-goto="caixa">Ver caixa</button></div>
+        <section class="sheet o5 fold" data-fold="ultimos">
+          <div class="shead"><h2>Últimos lançamentos</h2><button type="button" class="link-btn" data-goto="caixa">Ver caixa</button><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="inUltimos"></div>
         </section>
       </div>
@@ -594,7 +690,7 @@
   <div class="view" id="viewPedidos" hidden>
     <header class="phead">
       <h1 class="display">Pedidos</h1>
-      <div class="side"><button type="button" class="btn" id="novoPedidoBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Novo pedido</button></div>
+      <div class="side"><button type="button" class="btn desk-only" id="novoPedidoBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Novo pedido</button></div>
     </header>
     <div class="cols">
       <section class="sheet">
@@ -606,18 +702,20 @@
         <div class="rows" id="pedList"></div>
       </section>
       <aside>
-        <section class="sheet">
+        <section class="sheet sums-card">
           <div class="sums" style="flex-direction:column;gap:14px;margin:0;">
             <div><span class="k">A receber de todos os pedidos</span><b id="aReceber2">R$ 0,00</b></div>
             <div><span class="k" id="prevMesLabel">Previsto para este mês</span><b class="in" id="prevMes">R$ 0,00</b></div>
+            <div><span class="k">A pagar de todos os pedidos</span><b class="out" id="aPagar2">R$ 0,00</b></div>
+            <div><span class="k">Sobra prevista</span><b id="sobraPrev">R$ 0,00</b></div>
           </div>
         </section>
-        <section class="sheet">
-          <div class="shead"><h2>Parcelas pendentes</h2></div>
+        <section class="sheet fold" data-fold="pend">
+          <div class="shead"><h2>Parcelas pendentes</h2><span class="aside m-only" id="pendSum"></span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="pedPend"></div>
         </section>
-        <section class="sheet">
-          <div class="shead"><h2>Custos a pagar</h2></div>
+        <section class="sheet fold" data-fold="pcustos" id="secPedPagar">
+          <div class="shead"><h2>Custos a pagar</h2><span class="aside out m-only" id="pagarSum"></span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="rows" id="pedPagar"></div>
         </section>
       </aside>
@@ -641,14 +739,14 @@
         <div class="rows" id="lancList"></div>
       </section>
       <aside>
-        <section class="sheet">
+        <section class="sheet sums-card">
           <div class="sums" style="flex-direction:column;gap:14px;margin:0;">
             <div><span class="k">Entrou</span><b class="in" id="cxIn">R$ 0,00</b></div>
             <div><span class="k">Saiu</span><b class="out" id="cxOut">R$ 0,00</b></div>
           </div>
         </section>
-        <section class="sheet">
-          <div class="shead"><h2>Para onde foi o dinheiro</h2></div>
+        <section class="sheet fold" data-fold="cats">
+          <div class="shead"><h2>Para onde foi o dinheiro</h2><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
           <div class="cats" id="cats"></div>
         </section>
       </aside>
@@ -662,8 +760,8 @@
       <div class="side"><span class="mstatus"></span><div class="mstep"><button type="button" data-mdir="-1" aria-label="Mês anterior"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><span class="mlabel">—</span><button type="button" data-mdir="1" aria-label="Próximo mês"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div></div>
     </header>
     <div class="cols-2 fech">
-      <section class="sheet">
-        <div class="shead"><h2>Resultado do mês</h2></div>
+      <section class="sheet fold" data-fold="resultado">
+        <div class="shead"><h2>Resultado do mês</h2><span class="aside m-only" id="lucroSum"></span><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
         <div class="ledger">
           <div class="lrow"><span class="k">Venda bruta<small>tudo que entrou no caixa</small></span><span class="v" id="vBruta">R$ 0,00</span></div>
           <div class="lrow minus"><span class="k">Custos de produção<small>confecção, estampa, etiqueta, frete, embalagem, taxa de cartão</small></span><span class="v" id="vProd">R$ 0,00</span></div>
@@ -738,13 +836,13 @@
           <div class="lg"><span>Eventos <b id="iEventos">R$ 0,00</b></span><span>Marca própria <b id="iMarca">R$ 0,00</b></span></div>
         </div>
       </section>
-      <section class="sheet">
-        <div class="shead"><h2 id="rankLabel">Maiores clientes do ano</h2></div>
+      <section class="sheet fold" data-fold="rank">
+        <div class="shead"><h2 id="rankLabel">Maiores clientes do ano</h2><svg class="fold-ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
         <div class="rank" id="rank"></div>
       </section>
     </div>
     <section class="sheet">
-      <div class="shead"><h2>Últimos 12 meses</h2><div class="legend"><span><i style="background:var(--graphite)"></i>Venda bruta</span><span><i style="background:var(--in)"></i>Lucro líquido</span></div></div>
+      <div class="shead"><h2 id="chartTitle">Últimos 12 meses</h2><div class="legend"><span><i style="background:var(--graphite)"></i>Venda bruta</span><span><i style="background:var(--in)"></i>Lucro líquido</span></div></div>
       <div class="chart-wrap">
         <div id="chart"></div>
         <div class="chart-tip" id="chartTip" hidden></div>
@@ -1206,7 +1304,7 @@
     $('vProd').textContent = money(r.prod);
     $('vLBruto').textContent = money(r.lucroBruto);
     $('vGerais').textContent = money(r.gerais);
-    $('vLucro').textContent = money(r.lucro);
+    $('vLucro').textContent = money(r.lucro); $('lucroSum').textContent = money(r.lucro); $('lucroSum').classList.toggle('out', r.lucro < 0);
     $('lucroRow').classList.toggle('neg', r.lucro < 0);
     let dtxt = '', dcls = '';
     if(prev.L.length && prev.lucro !== 0){
@@ -1329,19 +1427,27 @@
   }
 
   // Previsão do mês: o que ainda deve entrar dos pedidos (parcelas com data neste mês e,
-  // no mês atual, também as atrasadas) menos os custos desses pedidos que ainda estão a pagar.
+  // no mês atual, também as atrasadas) menos os custos que ainda estão a pagar.
+  // Cada custo pendente conta UMA vez só, no mês em que deve ser pago: o mês da primeira
+  // parcela que ainda falta receber do pedido (nunca antes do mês atual). Pedido sem parcela
+  // pendente, mas com custo a pagar, cai no mês atual.
+  function custoMes(p){
+    const hoje = monthOf(todayIso); let mn = '';
+    pedInfo(p).parcs.forEach(x => { if(x.status === 'done') return; const mx = monthOf(x.data); if(mx && (!mn || mx < mn)) mn = mx; });
+    return (!mn || mn < hoje) ? hoje : mn;
+  }
   function previsaoMes(m){
     const atual = m === monthOf(todayIso);
-    let entrar = 0; const peds = new Set();
+    let entrar = 0, custoFalta = 0; const peds = new Set();
     pedidos.filter(p => p.status !== 'cancelado').forEach(p => {
       pedInfo(p).parcs.forEach(x => {
         if(x.status === 'done') return;
         const mx = monthOf(x.data);
         if(mx === m || (atual && x.status === 'late' && mx && mx < m)){ entrar += x.resta; peds.add(p); }
       });
+      const cf = custoFaltaDe(p);
+      if(cf > 0.005 && custoMes(p) === m){ custoFalta += cf; peds.add(p); }
     });
-    let custoFalta = 0;
-    peds.forEach(p => { custoFalta += custoFaltaDe(p); });
     return { entrar, custoFalta, n: peds.size };
   }
   function renderPrevisao(r){
@@ -1364,7 +1470,7 @@
     $('aReceber').textContent = money(aReceberTotal());
     if(!loaded.ped){ ['inReceber','inAndamento','inUltimos'].forEach(id => $(id).innerHTML = '<div class="empty">Carregando…</div>'); return; }
     const cp = pendingCustos();
-    $('aPagar').textContent = money(cp.reduce((a,o)=>a+o.x.resta,0));
+    $('aPagar').textContent = money(cp.reduce((a,o)=>a+o.x.resta,0)); $('secPagar').classList.toggle('is-empty', !cp.length);
     $('inPagar').innerHTML = cp.length
       ? cp.slice(0,6).map(o => custoRow(o)).join('') + (cp.length > 6 ? `<button type="button" class="row more" data-goto="pedidos">Ver os outros ${cp.length-6} em Pedidos</button>` : '')
       : '<div class="empty">Nenhum custo de pedido a pagar.</div>';
@@ -1373,6 +1479,7 @@
       ? pend.slice(0,6).map(parcRow).join('') + (pend.length > 6 ? `<button type="button" class="row more" data-goto="pedidos">Ver as outras ${pend.length-6} em Pedidos</button>` : '')
       : '<div class="empty">Nada pendente. Todo o dinheiro combinado já entrou.</div>';
     const and = pedidos.filter(p => p.status==='aprovado' || p.status==='producao').sort((a,b)=>(a.data||'').localeCompare(b.data||''));
+    $('andCount').textContent = and.length ? and.length + (and.length===1 ? ' pedido' : ' pedidos') : '';
     $('inAndamento').innerHTML = and.length
       ? and.slice(0,6).map(p => `<button type="button" class="row" data-ped="${p.id}"><span class="row-main"><span class="t">${esc(pedName(p))}</span><span class="m"><span>${+p.qtd||0} peças</span><span>fechado em ${ddmm(p.data)}</span></span></span><span class="row-end">${statusDot(p)}</span></button>`).join('')
       : '<div class="empty">Nenhum pedido aprovado ou em produção agora.</div>';
@@ -1390,7 +1497,8 @@
     else if(cfiltro === 'saidas') L = L.filter(l => l.tipo === 'saida');
     else if(cfiltro === 'socios') L = L.filter(l => l.tipo === 'aporte' || l.tipo === 'retirada');
     const nome = { todos:'lançamento', entradas:'entrada', saidas:'saída', socios:'aporte ou retirada de sócio' }[cfiltro];
-    box.innerHTML = L.length ? L.map(l => lancRow(l, closed)).join('') : `<div class="empty">Nenhum${cfiltro==='entradas'||cfiltro==='saidas'?'a':''} ${nome} em ${esc(monthName(cur))}.</div>`;
+    box.classList.remove('all');
+    box.innerHTML = L.length ? L.map(l => lancRow(l, closed)).join('') + (L.length > 8 ? `<button type="button" class="row more m-only" data-act="cxall">Ver todos os ${L.length} lançamentos</button>` : '') : `<div class="empty">Nenhum${cfiltro==='entradas'||cfiltro==='saidas'?'a':''} ${nome} em ${esc(monthName(cur))}.</div>`;
   }
 
   function renderClientes(){
@@ -1414,14 +1522,20 @@
 
   function renderPedidos(){
     const box = $('pedList');
-    $('aReceber2').textContent = money(aReceberTotal());
+    const recTot = aReceberTotal();
+    const pagTot = pedidos.filter(p => p.status !== 'cancelado').reduce((a,p)=>a+custoFaltaDe(p),0);
+    $('aReceber2').textContent = money(recTot);
+    $('aPagar2').textContent = money(pagTot);
+    $('sobraPrev').textContent = money(recTot - pagTot); $('sobraPrev').className = recTot - pagTot < 0 ? 'out' : 'in';
     $('prevMes').textContent = money(previstoNoMes(cur));
     $('prevMesLabel').textContent = `Previsto pra entrar em ${mesCurto(cur)}`;
     $('pfMes').textContent = `Fechados em ${mesCurto(cur)}`;
     if(!loaded.ped){ box.innerHTML = '<div class="empty">Carregando…</div>'; $('pedPend').innerHTML = ''; return; }
     const pend = pendingParcs();
+    $('pendSum').textContent = pend.length ? pend.length + (pend.length===1 ? ' parcela' : ' parcelas') : '';
     $('pedPend').innerHTML = pend.length ? pend.slice(0,8).map(parcRow).join('') : '<div class="empty">Nenhuma parcela pendente.</div>';
     const cp = pendingCustos();
+    $('pagarSum').textContent = cp.length ? money(cp.reduce((a,o)=>a+o.x.resta,0)) : ''; $('secPedPagar').classList.toggle('is-empty', !cp.length);
     $('pedPagar').innerHTML = cp.length ? cp.slice(0,8).map(o => custoRow(o)).join('') : '<div class="empty">Nenhum custo a pagar.</div>';
     let P = pedidos.slice().sort((a,b)=>(b.data||'').localeCompare(a.data||''));
     if(pfiltro === 'aberto') P = P.filter(p => p.status!=='cancelado' && !(p.status==='entregue' && pedInfo(p).pago));
@@ -1435,7 +1549,7 @@
       const total = +p.total||0;
       const prog = total ? Math.min(100, i.recebido/total*100) : 0;
       const late = i.parcs.some(x => x.status === 'late');
-      const right = p.status==='cancelado' ? '<span class="note">cancelado</span>' : i.pago ? '<span class="note in">pago</span>' : `<span class="note ${late?'out':''}">falta ${money(i.falta)}${late?', atrasado':''}</span>`;
+      const right = p.status==='cancelado' ? '<span class="note">cancelado</span>' : i.pago ? '<span class="note in">pago</span>' : `<span class="note ${late?'out':''}">falta ${money(i.falta)}${late?'<span class="late-x">, atrasado</span>':''}</span>`;
       return `<button type="button" class="row ped-row" data-ped="${p.id}">
         <span class="row-main"><span class="t">${esc(pedName(p))}</span><span class="m">${statusDot(p)}<span>${p.tipo==='marca'?'Marca própria':'Evento'}</span><span>${+p.qtd||0} peças</span><span>${ddmm(p.data)}</span></span>${p.status==='cancelado' ? '' : `<span class="bar"><span style="width:${prog}%"></span></span>`}</span>
         <span class="row-end col"><b class="amt">${money(total)}</b>${right}</span>
@@ -1488,18 +1602,20 @@
     $('mixMp').style.width = (t ? r.marca/t*100 : 0) + '%';
   }
   function renderChart(){
-    const months = []; for(let i=11;i>=0;i--) months.push(shiftMonth(cur,-i));
+    const narrow = window.matchMedia('(max-width:899px)').matches; const NM = narrow ? 6 : 12;
+    $('chartTitle').textContent = 'Últimos ' + NM + ' meses';
+    const months = []; for(let i=NM-1;i>=0;i--) months.push(shiftMonth(cur,-i));
     const data = months.map(m => { const r = computeMonth(m); return { m, v:r.entradas, l:r.lucro }; });
     let max = Math.max(1, ...data.map(d=>Math.max(d.v,d.l)));
     let min = Math.min(0, ...data.map(d=>d.l));
-    const W = 720, H = 230, padL = 64, padR = 10, padT = 12, padB = 30;
+    const W = narrow ? 360 : 720, H = narrow ? 220 : 230, padL = narrow ? 56 : 64, padR = 6, padT = 12, padB = 30;
     const iw = W - padL - padR, ih = H - padT - padB;
     // passo "bonito"
     const range = max - min; const raw = range/4; const mag = Math.pow(10, Math.floor(Math.log10(raw)));
     const step = [1,2,2.5,5,10].map(s=>s*mag).find(s=>s>=raw) || raw;
     max = Math.ceil(max/step)*step; min = Math.floor(min/step)*step;
     const y = v => padT + ih - (v - min)/(max - min)*ih;
-    const bw = iw/12;
+    const bw = iw/NM;
     const ticks = []; for(let t=min; t<=max+1e-9; t+=step) ticks.push(t);
     const short = n => { const a = Math.abs(n); return (n<0?'-':'') + (a>=1000 ? 'R$ ' + (a/1000).toLocaleString('pt-BR',{maximumFractionDigits:1}) + ' mil' : 'R$ ' + Math.round(a)); };
     let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Venda bruta e lucro líquido dos últimos 12 meses">`;
@@ -1747,7 +1863,7 @@
     document.body.classList.toggle('orc-mode', v === 'orc');
     if(v === 'orc'){
       document.documentElement.style.setProperty('--nav-h', (mobile() ? $('sideNav').offsetHeight : 0) + 'px');
-      if(!$('orcFrame').getAttribute('src')) $('orcFrame').setAttribute('src', '/orcamento.html');
+      if(!$('orcFrame').getAttribute('src')) $('orcFrame').setAttribute('src', 'orcamento.html');
     }
     const extra = ['fechamento','relatorios','clientes'].includes(v);
     document.querySelectorAll('.nav-btn').forEach(b => { const on = b.dataset.view === v || (b.id === 'maisBtn' && extra); if(on) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
@@ -1761,6 +1877,7 @@
     else if(a === 'novoped'){ closeModal('novoModal'); openPed(null); }
     else if(a === 'senha'){ closeModal('maisModal'); $('novaSenha').value = ''; $('novaSenha2').value = ''; openModal('senhaModal'); setTimeout(()=>$('novaSenha').focus(),30); }
     else if(a === 'sair'){ closeModal('maisModal'); sair(); }
+    else if(a === 'cxall'){ $('lancList').classList.add('all'); }
   }
   document.addEventListener('click', e => {
     const g = e.target.closest('[data-goto]'); if(g){ e.preventDefault(); document.querySelectorAll('.ark-modal').forEach(m => m.hidden = true); setView(g.dataset.goto); return; }
@@ -1774,6 +1891,40 @@
     if(!detPed || !db) return; const id = detPed.id; const vinc = lancs.filter(l=>l.pedidoId===id).length;
     twoTap(e.currentTarget, async () => { try{ await db.collection('pedidos').doc(id).delete(); closeModal('pedDetModal'); showToast(vinc ? 'Pedido excluído. Os lançamentos dele continuam no caixa.' : 'Pedido excluído.'); }catch(_){ showToast('Não foi possível excluir.', true); } });
   });
+
+  // ---------- seções recolhíveis (só no celular) ----------
+  (function(){
+    const mq = window.matchMedia('(max-width:899px)');
+    let st = {}; try{ st = JSON.parse(localStorage.getItem('arcFold') || '{}') || {}; }catch(_){ st = {}; }
+    const secs = [...document.querySelectorAll('.fold')];
+    function sync(){
+      secs.forEach(sec => {
+        const h = sec.querySelector('.shead');
+        const open = !!st[sec.dataset.fold];
+        sec.classList.toggle('open', open);
+        if(mq.matches){ h.setAttribute('role','button'); h.tabIndex = 0; h.setAttribute('aria-expanded', String(open)); }
+        else { h.removeAttribute('role'); h.removeAttribute('tabindex'); h.removeAttribute('aria-expanded'); }
+      });
+    }
+    function toggle(sec){
+      if(!mq.matches) return;
+      st[sec.dataset.fold] = !st[sec.dataset.fold];
+      try{ localStorage.setItem('arcFold', JSON.stringify(st)); }catch(_){}
+      sync();
+    }
+    document.addEventListener('click', e => {
+      const h = e.target.closest('.fold > .shead'); if(!h || e.target.closest('button, a, input, select')) return;
+      toggle(h.parentElement);
+    });
+    document.addEventListener('keydown', e => {
+      if(e.key !== 'Enter' && e.key !== ' ') return;
+      const h = e.target.closest && e.target.closest('.fold > .shead'); if(!h || e.target !== h) return;
+      e.preventDefault(); toggle(h.parentElement);
+    });
+    const onMq = () => { sync(); try{ render(); }catch(_){} };
+    if(mq.addEventListener) mq.addEventListener('change', onMq); else mq.addListener(onMq);
+    sync();
+  })();
   // pedido vindo da calculadora de orçamento
   window.addEventListener('message', e => {
     if(e.origin !== location.origin || !e.data || e.data.type !== 'arcano:novo-pedido') return;
