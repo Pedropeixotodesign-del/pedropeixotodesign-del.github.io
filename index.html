@@ -570,6 +570,17 @@
     .stats.res3 .stat:nth-child(3){ padding-right:0; }
   }
   @media (max-width:899px){ .stats.res3 .v{ font-size:clamp(17px, 5.2vw, 22px); white-space:nowrap; } }
+  .stat .sub{ font-size:12.5px; color:var(--graphite); margin-top:2px; }
+  .stat .sub:empty{ display:none; }
+  @media (max-width:899px){
+    .stats.res3{ grid-template-columns:1fr; }
+    .stats.res3 .stat{ display:grid; grid-template-columns:1fr auto; align-items:baseline; column-gap:12px; padding:12px 0; border-top:1px solid var(--rule) !important; }
+    .stats.res3 .stat:first-child{ border-top:none !important; padding-top:4px; }
+    .stats.res3 .stat:nth-child(3){ grid-column:auto; }
+    .stats.res3 .stat .k{ grid-column:1; grid-row:1; }
+    .stats.res3 .stat .v{ grid-column:2; grid-row:1; text-align:right; font-size:clamp(18px, 5.6vw, 22px); }
+    .stats.res3 .stat .sub{ grid-column:2; grid-row:2; text-align:right; }
+  }
 
   .nav-logo{ -webkit-mask:url(data:image/png;base64,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) center/contain no-repeat; mask:url(data:image/png;base64,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) center/contain no-repeat; }
 
@@ -871,11 +882,11 @@
       </div>
     </div>
     <section class="sheet">
-      <div class="shead"><h2>Resultado</h2></div>
+      <div class="shead"><h2 id="resTitle">Resultado</h2></div>
       <div class="stats res3">
-        <div class="stat"><span class="k">Entrou</span><span class="v in" id="rIn">R$ 0,00</span></div>
-        <div class="stat"><span class="k">Saiu</span><span class="v out" id="rOut">R$ 0,00</span></div>
-        <div class="stat"><span class="k">Lucro líquido</span><span class="v" id="rLucro">R$ 0,00</span></div>
+        <div class="stat"><span class="k">Entrada</span><span class="v in" id="rIn">R$ 0,00</span><span class="sub" id="rInSub"></span></div>
+        <div class="stat"><span class="k">Saída</span><span class="v out" id="rOut">R$ 0,00</span><span class="sub" id="rOutSub"></span></div>
+        <div class="stat"><span class="k">Lucro líquido</span><span class="v" id="rLucro">R$ 0,00</span><span class="sub" id="rLucroSub"></span></div>
       </div>
     </section>
     <div class="cols-2">
@@ -1652,14 +1663,20 @@
   let rper = 'mes';
   const isoAdd = (iso, d) => { const t = new Date(iso + 'T12:00:00'); t.setDate(t.getDate() + d); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; };
   const dmy = iso => iso ? `${iso.slice(8,10)}/${iso.slice(5,7)}/${iso.slice(0,4)}` : '';
+  const fimMes = m => isoAdd(shiftMonth(m,1) + '-01', -1);
   function periodo(){
-    const fimMes = m => isoAdd(shiftMonth(m,1) + '-01', -1);
     if(rper === '7d') return { de:isoAdd(todayIso,-6), ate:todayIso, nome:'nos últimos 7 dias' };
     if(rper === '30d') return { de:isoAdd(todayIso,-29), ate:todayIso, nome:'nos últimos 30 dias' };
-    if(rper === 'ano') return { de:todayIso.slice(0,4) + '-01-01', ate:todayIso, nome:'em ' + todayIso.slice(0,4) };
+    if(rper === 'ano') return { de:todayIso.slice(0,4) + '-01-01', ate:todayIso.slice(0,4) + '-12-31', nome:'em ' + todayIso.slice(0,4) };
     if(rper === 'tudo'){
       const ds = lancs.map(l=>l.data).concat(pedidos.map(p=>p.data)).filter(Boolean).sort();
-      return { de:ds[0] || todayIso, ate:(ds[ds.length-1] > todayIso ? ds[ds.length-1] : todayIso), nome:'desde o início' };
+      let fim = todayIso;
+      pedidos.filter(p => p.status !== 'cancelado').forEach(p => {
+        pedInfo(p).parcs.forEach(x => { if(x.status !== 'done' && x.data > fim) fim = x.data; });
+        (Array.isArray(p.custos) ? p.custos : []).forEach(c => { if(c.data && c.data > fim) fim = c.data; });
+      });
+      if(ds.length && ds[ds.length-1] > fim) fim = ds[ds.length-1];
+      return { de:ds[0] || todayIso, ate:fim, nome:'desde o início' };
     }
     if(rper === 'periodo'){
       let de = $('rDe').value || cur + '-01', ate = $('rAte').value || todayIso;
@@ -1681,6 +1698,25 @@
       } else if(l.tipo === 'saida'){ if(CAT_PROD.includes(l.categoria)) prod += v; else gerais += v; }
     });
     const lucro = entradas - prod - gerais;
+    // previsto: o que ainda falta entrar e sair, na data em que deve acontecer
+    // (atrasado ou sem data conta hoje; custo sem data conta na 1ª parcela pendente do pedido)
+    const eff = d => (!d || d < todayIso) ? todayIso : d;
+    const accP = {};
+    let aEntrar = 0, aSair = 0;
+    pedidos.filter(p => p.status !== 'cancelado').forEach(p => {
+      const parcs = pedInfo(p).parcs.filter(x => x.status !== 'done');
+      parcs.forEach(x => {
+        if(!inR(eff(x.data))) return;
+        aEntrar += x.resta;
+        if(p.tipo === 'marca') marca += x.resta; else eventos += x.resta;
+        const k = cliName(p).trim(); accP[k] = (accP[k]||0) + x.resta;
+      });
+      const prim = parcs.map(x => x.data).filter(Boolean).sort()[0];
+      const ci = custosInfo(p);
+      if(ci.lines.length) ci.lines.forEach(x => { if(x.resta > 0.005 && inR(eff(x.data || prim))) aSair += x.resta; });
+      else { const cf = custoFaltaDe(p); if(cf > 0.005 && inR(eff(prim))) aSair += cf; }
+    });
+    const entPrev = entradas + aEntrar, saiPrev = prod + gerais + aSair, lucroPrev = entPrev - saiPrev;
     const P = pedidos.filter(p => inR(p.data) && p.status !== 'cancelado');
     const nPed = P.length, pecas = P.reduce((a,p)=>a+(+p.qtd||0),0), vendido = P.reduce((a,p)=>a+(+p.total||0),0);
     const ids = new Set(P.map(p=>p.id));
@@ -1690,9 +1726,10 @@
       const p = pedidos.find(x=>x.id===l.pedidoId); if(!p) return;
       const k = cliName(p).trim(); acc[k] = (acc[k]||0) + (+l.valor||0);
     });
-    return { entradas, saidas:prod+gerais, lucro, eventos, marca, nPed, pecas,
+    Object.entries(accP).forEach(([k,v]) => { acc[k] = (acc[k]||0) + v; });
+    return { entradas, saidas:prod+gerais, lucro, entPrev, saiPrev, lucroPrev, aEntrar, aSair, eventos, marca, nPed, pecas,
       ticket: nPed ? vendido/nPed : NaN, precoPeca: pecas ? vendido/pecas : NaN,
-      custoPeca: pecas && custoPed ? custoPed/pecas : NaN, margem: entradas ? lucro/entradas : NaN,
+      custoPeca: pecas && custoPed ? custoPed/pecas : NaN, margem: entPrev ? lucroPrev/entPrev : NaN,
       rank: Object.entries(acc).sort((a,b)=>b[1]-a[1]).slice(0,5) };
   }
   function renderRelatorios(){
@@ -1703,9 +1740,13 @@
     if(rper === 'periodo'){ if(!$('rDe').value) $('rDe').value = pr.de; if(!$('rAte').value) $('rAte').value = pr.ate; }
     $('relSpan').textContent = rper === 'mes' || rper === 'periodo' ? '' : `${dmy(pr.de)} a ${dmy(pr.ate)}`;
     const r = computeRange(pr.de, pr.ate);
-    $('rIn').textContent = money(r.entradas);
-    $('rOut').textContent = money(r.saidas);
-    $('rLucro').textContent = money(r.lucro); $('rLucro').classList.toggle('out', r.lucro < 0);
+    $('rIn').textContent = money(r.entPrev);
+    $('rOut').textContent = money(r.saiPrev);
+    $('rLucro').textContent = money(r.lucroPrev); $('rLucro').classList.toggle('out', r.lucroPrev < 0);
+    $('rInSub').textContent = r.aEntrar > 0.005 ? `já entrou ${money(r.entradas)}` : '';
+    $('rOutSub').textContent = r.aSair > 0.005 ? `já saiu ${money(r.saidas)}` : '';
+    $('rLucroSub').textContent = (r.aEntrar > 0.005 || r.aSair > 0.005) ? `até agora ${money(r.lucro)}` : '';
+    $('resTitle').textContent = (r.aEntrar > 0.005 || r.aSair > 0.005) ? 'Resultado previsto' : 'Resultado';
     $('indTitle').textContent = 'Pedidos fechados ' + pr.nome;
     $('iPedidos').textContent = r.nPed;
     $('iPecas').textContent = r.pecas;
@@ -1735,7 +1776,7 @@
       $('chartTitle').textContent = 'Últimos ' + n + ' meses';
     }
     const NM = months.length;
-    const data = months.map(m => { const r = computeMonth(m); return { m, v:r.entradas, l:r.lucro }; });
+    const data = months.map(m => { const r = computeRange(m + '-01', fimMes(m)); return { m, v:r.entPrev, l:r.lucroPrev }; });
     let max = Math.max(1, ...data.map(d=>Math.max(d.v,d.l)));
     let min = Math.min(0, ...data.map(d=>d.l));
     const W = narrow ? Math.max(360, NM*44) : Math.max(720, NM*36), H = narrow ? 220 : 230, padL = narrow ? 56 : 64, padR = 6, padT = 12, padB = 30;
@@ -1751,8 +1792,8 @@
     let s = `<svg viewBox="0 0 ${W} ${H}"${narrow && W > 360 ? ` style="min-width:${W}px"` : ''} role="img" aria-label="Venda bruta e lucro líquido dos últimos 12 meses">`;
     ticks.forEach(t => { s += `<line x1="${padL}" x2="${W-padR}" y1="${y(t)}" y2="${y(t)}" stroke="var(--card-line)" stroke-width="1"/><text x="${padL-8}" y="${y(t)+4}" text-anchor="end" font-size="10.5" font-weight="700" fill="var(--ink-soft)">${short(t)}</text>`; });
     data.forEach((d,i) => {
-      const x0 = padL + i*bw; const w = bw*0.34;
-      const x1 = x0 + bw*0.14, x2 = x1 + w + 3;
+      const x0 = padL + i*bw; const w = Math.min(bw*0.34, 34);
+      const x1 = x0 + bw/2 - w - 1.5, x2 = x1 + w + 3;
       const yb = y(Math.max(0,d.v)), y0 = y(0);
       s += `<rect x="${x1}" y="${yb}" width="${w}" height="${Math.max(0,y0-yb)}" rx="3" fill="var(--ink-soft)" opacity="${d.m===cur?1:0.55}" class="cbar" data-k="v" data-m="${d.m}" data-val="${d.v}" aria-label="${monthName(d.m)} — venda bruta ${money(d.v)}"></rect>`;
       const yl = d.l >= 0 ? y(d.l) : y0; const hl = Math.abs(y(d.l) - y0);
