@@ -543,6 +543,34 @@
     .custo-row .pc-cat{ grid-column:1 / -1; }
   }
 
+  /* ---------- relatórios: período ---------- */
+  .period{ display:flex; flex-direction:column; gap:10px; }
+  .period .filters{ margin:0; }
+  .period-sub{ display:flex; align-items:center; gap:10px 18px; flex-wrap:wrap; min-height:40px; }
+  .period-sub > [hidden]{ display:none !important; }
+  .period-span{ font-size:14px; font-weight:600; color:var(--graphite); }
+  .range{ display:flex; gap:10px 14px; flex-wrap:wrap; }
+  .range label{ display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; }
+  .range input{ font:inherit; font-size:14px; padding:8px 10px; border:1px solid var(--rule-strong); border-radius:10px; background:var(--sheet); color:var(--ink); }
+  .stats.res3 .v{ font-size:clamp(22px, 2.6vw, 34px); font-stretch:120%; }
+  .stats.res3 .v.in{ color:var(--in); } .stats.res3 .v.out{ color:var(--out); }
+  #viewPedidos .phead .side{ display:flex; align-items:center; gap:12px; }
+  @media (max-width:899px){
+    .chart-wrap{ overflow-x:auto; }
+    .stats.res3{ grid-template-columns:1fr 1fr; }
+    .stats.res3 .stat:nth-child(3){ grid-column:1 / -1; border-top:1px solid var(--rule); }
+    .stats.res3 .v{ font-size:22px; }
+    .range{ width:100%; }
+    .range label{ flex:1; min-width:0; }
+    .range input{ flex:1; min-width:0; }
+  }
+  .stats.res3 .stat{ padding-right:12px; min-width:0; }
+  @media (max-width:899px){
+    .period .filters{ flex-wrap:wrap; overflow:visible; margin-left:0; margin-right:0; padding:0; }
+    .stats.res3 .stat:nth-child(3){ padding-right:0; }
+  }
+  @media (max-width:899px){ .stats.res3 .v{ font-size:clamp(17px, 5.2vw, 22px); white-space:nowrap; } }
+
   .nav-logo{ -webkit-mask:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAAA6CAYAAABPjVypAAAGKklEQVR42u2cS6gcRRSGv+4eTW6Sq4nGxGhQYiIKPhIXhmhQcSU+AqKCIIqoC0ERfICgC10IutFsFCEL39npygeIIKibKyoi+CCJgghekxsxUW9MjDPT7aLOcc7t9Dyqp++YO9UHimFmuqurz3/q1HlVRfhTBCRAKs3SicDpwBpppwArgCXSsoL+JoG4y3My6bPbvXrdsi59IPctBiYG6CPqM45FPfqI5RlRn3GcIHyLgZmGJ+NjoA205LfVwKXA5cAmYIMAsKzHQGoywjcoAIkwvg0sBW4AbgOuBJZ3uSc1yM83jQrsqKI+MvlMGx7MnwDuBe4XSbeMTqVD2+JawIdHSpl4LfCNIJeJCmoJ47O6eTfl275BmP+UubEps6FmYkUANPostq8Cdxp93qgVQ7UUd/mtDbwgzG/WOn10lMjnXTJF/qnVxfyqoCgn+RlwJvCtseWHMb2yAlM0GrHpeDySmqFzHLFIkHkSOEmsnDI635qlSQ9mtw3wwYIRGSakwDrgO3G5faVUp1aSY/KfwBHz24SEJ/JgJCHPAAXgDolX+Ep/ZiR+D/AO8AnwPTADHDXXLgbOAC4Argdukd9CA6HQ9PxSgPCx9XVB+Qt4QJjpQ+cD70sfofgYcxwxNS83iMmZeXi4CtZh4GrD1IZIc1wQolCwEzPLIuA942UHBYAy4dYSDNBrn5A+FpVYUPX5q4DfzCIeBADWubrYM3qZiRQfAnaIVDdLRD91vdkPvCIAtkP0hNcZZNIBmurrr2WhzTg2QeO7iL/dw0MfS2oYpp0lLx57grc3F8IoQwr8bmAWlyXLQvAPLACzwDSddNmgquOHCj3bg8CvoQGgdGMJxyuik55sVeCYNMWcDYYsAEePEw+xFSoAZad7VWpCc6VxqAAMYj5ax8ra61VSO1QA+oUpiszMCFcVMYmrloiGnAEprgaoBoC5qUmVyrXAZmALcCFwDnCqAHBiBSrJWj5xyADExtlaJhbS7cBW+T6fQUFCnwFaB5QA9wEPiqRbHZ3lgms1CBUB0BAzcBPwInBZbmHUKGZN8wCAMv8m4HVZVFs100cDQCLMvhl4k05Esq4DmmeKjM7fCHxKpwS7jBVShV8QQpJ+Tk44w9Wsv0b53Gwbv0hqTUYFpbgKuI2UK0WxlRDTwE/AH3Qq6nwl4yrgZAKJhioIXwkjffOxapK+JYyrwkf4gvFP0M8pzt1CJx2ZeEp+DDwCbC/woMusR6oOg1JB1xirZ1AA9Nqdwnzd95Qa6S3D/Ab+ZS0LHoDNJTxQDVU8lwtbDEtLcGWRwXjEMS4X7PPCWvc5DeyieLdk2fDDamBlSDMgFoujDB0A/jbWSxW2/0UyK9shzYB4SKmtyjHJcLWiVQC6oAD4vz1WTfaswsWhMgKKPcVDSP5aXDZsGCA00JcCz0h/KQGFpOMSC6iarMtxiZoUlw2LPO6PjRfeBB4C7g5J91vahV9FtK2K3guca/rSiuduLT/jVgLPE05VdGF19IclXX/tZK/EkpYOCPiE+B5PAz/nnt0GfiGwTXrbRQWUiYLagNmPwBRui9OMUW2LcYn7NcB64Dzg7JxXrQvvuwLM1JgH4/4LRwNsK6GCitSR731N88yWiYSuG3I8C25/wEeiCijp0UZmMW/1aW3m7rq3MajPgY/l/yMmPjT2VtAs8Aadwqhh+mr0aUnBQqxMflQ+90mYIxiHLMIdsnSQThHWqKai7qh5ScaixV07jYk69laQLrz3MNrjCVTv75EIaEwnF3DdmJumxxxXoyDsMCCkI5D8A7gSR+uVq3f8We7asQZAqyMi3BE1GeVSlIM8WGfYDJ3CryTnzAFcItHWcQSh8MAmm0p83Ly0HtI3rJlqmTgl/gBdfA8dxzbcLszM9NFm4W9l7XpilgVhM/BBwY0ts1inBf+nBrT8gj4DPGYW216On/63sWAcvi87yI7PYVvLozXlc7rfy4M7GfFlEzbwbUdE4h+WkLNPJNaO4wrgWVzx2H7G4yyjQ9EAcXq1xVfIrNiKq6JYjzuYddI4YoeB32Vq7caVmEzhDvzDOGBtDxs/Pw5wqcvTZEy9DkpN+sSoBrlGxzDZw4zXfiYHeNakuW/2X4oegfDPRBp+AAAAAElFTkSuQmCC) center/contain no-repeat; mask:url(data:image/png;base64,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) center/contain no-repeat; }
 
   /* ---- Cartão de exportação 1080x1920 (cores fixas, igual à calculadora) ---- */
@@ -696,7 +724,7 @@
   <div class="view" id="viewPedidos" hidden>
     <header class="phead">
       <h1 class="display">Pedidos</h1>
-      <div class="side"><button type="button" class="btn desk-only" id="novoPedidoBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Novo pedido</button></div>
+      <div class="side"><div class="mstep"><button type="button" data-mdir="-1" aria-label="Mês anterior"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><span class="mlabel">—</span><button type="button" data-mdir="1" aria-label="Próximo mês"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div><button type="button" class="btn desk-only" id="novoPedidoBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Novo pedido</button></div>
     </header>
     <div class="cols">
       <section class="sheet">
@@ -823,19 +851,44 @@
   <div class="view" id="viewRel" hidden>
     <header class="phead">
       <h1 class="display">Relatórios</h1>
-      <div class="side"><div class="mstep"><button type="button" data-mdir="-1" aria-label="Mês anterior"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><span class="mlabel">—</span><button type="button" data-mdir="1" aria-label="Próximo mês"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div></div>
     </header>
+    <div class="period">
+      <div class="filters" role="group" aria-label="Período do relatório">
+        <button type="button" class="chip-btn" data-rper="mes" aria-pressed="true">Mês</button>
+        <button type="button" class="chip-btn" data-rper="7d" aria-pressed="false">7 dias</button>
+        <button type="button" class="chip-btn" data-rper="30d" aria-pressed="false">30 dias</button>
+        <button type="button" class="chip-btn" data-rper="ano" aria-pressed="false">Este ano</button>
+        <button type="button" class="chip-btn" data-rper="tudo" aria-pressed="false">Desde o início</button>
+        <button type="button" class="chip-btn" data-rper="periodo" aria-pressed="false">Escolher datas</button>
+      </div>
+      <div class="period-sub">
+        <div id="relMes"><div class="mstep"><button type="button" data-mdir="-1" aria-label="Mês anterior"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button><span class="mlabel">—</span><button type="button" data-mdir="1" aria-label="Próximo mês"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button></div></div>
+        <div class="range" id="relRange" hidden>
+          <label>De <input type="date" id="rDe"></label>
+          <label>Até <input type="date" id="rAte"></label>
+        </div>
+        <span class="period-span" id="relSpan"></span>
+      </div>
+    </div>
+    <section class="sheet">
+      <div class="shead"><h2>Resultado</h2></div>
+      <div class="stats res3">
+        <div class="stat"><span class="k">Entrou</span><span class="v in" id="rIn">R$ 0,00</span></div>
+        <div class="stat"><span class="k">Saiu</span><span class="v out" id="rOut">R$ 0,00</span></div>
+        <div class="stat"><span class="k">Lucro líquido</span><span class="v" id="rLucro">R$ 0,00</span></div>
+      </div>
+    </section>
     <div class="cols-2">
       <section class="sheet">
-        <div class="shead"><h2>Pedidos fechados no mês</h2><button type="button" class="info" data-info="infoInd" aria-expanded="false" aria-label="Como os indicadores são calculados">?</button></div>
-        <p class="info-text" id="infoInd" hidden>Peças e preços consideram os pedidos com data de fechamento neste mês. O custo por peça usa as saídas lançadas nesses pedidos.</p>
+        <div class="shead"><h2 id="indTitle">Pedidos fechados no mês</h2><button type="button" class="info" data-info="infoInd" aria-expanded="false" aria-label="Como os indicadores são calculados">?</button></div>
+        <p class="info-text" id="infoInd" hidden>Peças e preços consideram os pedidos com data de fechamento dentro do período. O custo por peça usa as saídas lançadas nesses pedidos.</p>
         <div class="stats" style="margin-top:6px;">
           <div class="stat"><span class="k">Pedidos</span><span class="v" id="iPedidos">0</span></div>
           <div class="stat"><span class="k">Peças vendidas</span><span class="v" id="iPecas">0</span></div>
           <div class="stat"><span class="k">Ticket médio</span><span class="v" id="iTicket">—</span></div>
           <div class="stat"><span class="k">Preço médio por peça</span><span class="v" id="iPreco">—</span></div>
           <div class="stat"><span class="k">Custo médio por peça</span><span class="v" id="iCusto">—</span></div>
-          <div class="stat"><span class="k">Margem do mês</span><span class="v" id="iMargem">—</span></div>
+          <div class="stat"><span class="k">Margem</span><span class="v" id="iMargem">—</span></div>
         </div>
         <div class="mix">
           <div class="bar"><span class="ev" id="mixEv" style="width:0%"></span><span class="mp" id="mixMp" style="width:0%"></span></div>
@@ -1360,10 +1413,9 @@
     renderCaixa(r, closed);
     renderPedidos();
     renderClientes();
-    renderIndicadores(r);
+    renderRelatorios();
     renderChart();
     renderCats(r);
-    renderRank();
     if(!$('pedDetModal').hidden && detPed) openPedDetail(detPed.id, true);
   }
 
@@ -1596,7 +1648,65 @@
     if(!refresh) openModal('pedDetModal');
   }
 
-  function renderIndicadores(r){
+  // ---------- relatórios por período ----------
+  let rper = 'mes';
+  const isoAdd = (iso, d) => { const t = new Date(iso + 'T12:00:00'); t.setDate(t.getDate() + d); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; };
+  const dmy = iso => iso ? `${iso.slice(8,10)}/${iso.slice(5,7)}/${iso.slice(0,4)}` : '';
+  function periodo(){
+    const fimMes = m => isoAdd(shiftMonth(m,1) + '-01', -1);
+    if(rper === '7d') return { de:isoAdd(todayIso,-6), ate:todayIso, nome:'nos últimos 7 dias' };
+    if(rper === '30d') return { de:isoAdd(todayIso,-29), ate:todayIso, nome:'nos últimos 30 dias' };
+    if(rper === 'ano') return { de:todayIso.slice(0,4) + '-01-01', ate:todayIso, nome:'em ' + todayIso.slice(0,4) };
+    if(rper === 'tudo'){
+      const ds = lancs.map(l=>l.data).concat(pedidos.map(p=>p.data)).filter(Boolean).sort();
+      return { de:ds[0] || todayIso, ate:(ds[ds.length-1] > todayIso ? ds[ds.length-1] : todayIso), nome:'desde o início' };
+    }
+    if(rper === 'periodo'){
+      let de = $('rDe').value || cur + '-01', ate = $('rAte').value || todayIso;
+      if(ate < de){ const t = de; de = ate; ate = t; }
+      return { de, ate, nome:'no período' };
+    }
+    return { de:cur + '-01', ate:fimMes(cur), nome:'em ' + mesCurto(cur) };
+  }
+  function computeRange(de, ate){
+    const inR = d => d && d >= de && d <= ate;
+    let entradas=0, prod=0, gerais=0, eventos=0, marca=0;
+    lancs.forEach(l => {
+      if(!inR(l.data)) return; const v = +l.valor || 0;
+      if(l.tipo === 'entrada'){
+        entradas += v;
+        const p = l.pedidoId && pedidos.find(x=>x.id===l.pedidoId);
+        if(p){ if(p.tipo==='marca') marca += v; else eventos += v; }
+        else if(l.categoria === 'Venda marca própria (avulsa)') marca += v;
+      } else if(l.tipo === 'saida'){ if(CAT_PROD.includes(l.categoria)) prod += v; else gerais += v; }
+    });
+    const lucro = entradas - prod - gerais;
+    const P = pedidos.filter(p => inR(p.data) && p.status !== 'cancelado');
+    const nPed = P.length, pecas = P.reduce((a,p)=>a+(+p.qtd||0),0), vendido = P.reduce((a,p)=>a+(+p.total||0),0);
+    const ids = new Set(P.map(p=>p.id));
+    const custoPed = lancs.filter(l => l.tipo==='saida' && ids.has(l.pedidoId)).reduce((a,l)=>a+(+l.valor||0),0);
+    const acc = {};
+    lancs.filter(l => l.tipo==='entrada' && l.pedidoId && inR(l.data)).forEach(l => {
+      const p = pedidos.find(x=>x.id===l.pedidoId); if(!p) return;
+      const k = cliName(p).trim(); acc[k] = (acc[k]||0) + (+l.valor||0);
+    });
+    return { entradas, saidas:prod+gerais, lucro, eventos, marca, nPed, pecas,
+      ticket: nPed ? vendido/nPed : NaN, precoPeca: pecas ? vendido/pecas : NaN,
+      custoPeca: pecas && custoPed ? custoPed/pecas : NaN, margem: entradas ? lucro/entradas : NaN,
+      rank: Object.entries(acc).sort((a,b)=>b[1]-a[1]).slice(0,5) };
+  }
+  function renderRelatorios(){
+    document.querySelectorAll('[data-rper]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.rper === rper)));
+    $('relMes').hidden = rper !== 'mes';
+    $('relRange').hidden = rper !== 'periodo';
+    const pr = periodo();
+    if(rper === 'periodo'){ if(!$('rDe').value) $('rDe').value = pr.de; if(!$('rAte').value) $('rAte').value = pr.ate; }
+    $('relSpan').textContent = rper === 'mes' || rper === 'periodo' ? '' : `${dmy(pr.de)} a ${dmy(pr.ate)}`;
+    const r = computeRange(pr.de, pr.ate);
+    $('rIn').textContent = money(r.entradas);
+    $('rOut').textContent = money(r.saidas);
+    $('rLucro').textContent = money(r.lucro); $('rLucro').classList.toggle('out', r.lucro < 0);
+    $('indTitle').textContent = 'Pedidos fechados ' + pr.nome;
     $('iPedidos').textContent = r.nPed;
     $('iPecas').textContent = r.pecas;
     $('iTicket').textContent = isFinite(r.ticket) ? money(r.ticket) : '—';
@@ -1608,15 +1718,27 @@
     const t = r.eventos + r.marca;
     $('mixEv').style.width = (t ? r.eventos/t*100 : 0) + '%';
     $('mixMp').style.width = (t ? r.marca/t*100 : 0) + '%';
+    $('rankLabel').textContent = 'Maiores clientes ' + pr.nome;
+    $('rank').innerHTML = r.rank.length ? r.rank.map(([k,v]) => `<div><span>${esc(k)}</span><span>${money(v)}</span></div>`).join('') : '<div class="empty">Nenhum recebimento ligado a pedidos nesse período.</div>';
   }
+
   function renderChart(){
-    const narrow = window.matchMedia('(max-width:899px)').matches; const NM = narrow ? 6 : 12;
-    $('chartTitle').textContent = 'Últimos ' + NM + ' meses';
-    const months = []; for(let i=NM-1;i>=0;i--) months.push(shiftMonth(cur,-i));
+    const narrow = window.matchMedia('(max-width:899px)').matches;
+    const pr = periodo(); const mDe = monthOf(pr.de), mAte = monthOf(pr.ate);
+    let months = [];
+    if(['ano','tudo','periodo'].includes(rper) && mDe < shiftMonth(mAte,-1)){
+      for(let m = mDe; m <= mAte && months.length < 60; m = shiftMonth(m,1)) months.push(m);
+      if(months.length > 24) months = months.slice(-24);
+      $('chartTitle').textContent = 'Mês a mês ' + pr.nome;
+    } else {
+      const n = narrow ? 6 : 12; for(let i=n-1;i>=0;i--) months.push(shiftMonth(mAte,-i));
+      $('chartTitle').textContent = 'Últimos ' + n + ' meses';
+    }
+    const NM = months.length;
     const data = months.map(m => { const r = computeMonth(m); return { m, v:r.entradas, l:r.lucro }; });
     let max = Math.max(1, ...data.map(d=>Math.max(d.v,d.l)));
     let min = Math.min(0, ...data.map(d=>d.l));
-    const W = narrow ? 360 : 720, H = narrow ? 220 : 230, padL = narrow ? 56 : 64, padR = 6, padT = 12, padB = 30;
+    const W = narrow ? Math.max(360, NM*44) : Math.max(720, NM*36), H = narrow ? 220 : 230, padL = narrow ? 56 : 64, padR = 6, padT = 12, padB = 30;
     const iw = W - padL - padR, ih = H - padT - padB;
     // passo "bonito"
     const range = max - min; const raw = range/4; const mag = Math.pow(10, Math.floor(Math.log10(raw)));
@@ -1626,7 +1748,7 @@
     const bw = iw/NM;
     const ticks = []; for(let t=min; t<=max+1e-9; t+=step) ticks.push(t);
     const short = n => { const a = Math.abs(n); return (n<0?'-':'') + (a>=1000 ? 'R$ ' + (a/1000).toLocaleString('pt-BR',{maximumFractionDigits:1}) + ' mil' : 'R$ ' + Math.round(a)); };
-    let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Venda bruta e lucro líquido dos últimos 12 meses">`;
+    let s = `<svg viewBox="0 0 ${W} ${H}"${narrow && W > 360 ? ` style="min-width:${W}px"` : ''} role="img" aria-label="Venda bruta e lucro líquido dos últimos 12 meses">`;
     ticks.forEach(t => { s += `<line x1="${padL}" x2="${W-padR}" y1="${y(t)}" y2="${y(t)}" stroke="var(--card-line)" stroke-width="1"/><text x="${padL-8}" y="${y(t)+4}" text-anchor="end" font-size="10.5" font-weight="700" fill="var(--ink-soft)">${short(t)}</text>`; });
     data.forEach((d,i) => {
       const x0 = padL + i*bw; const w = bw*0.34;
@@ -1933,6 +2055,9 @@
     if(mq.addEventListener) mq.addEventListener('change', onMq); else mq.addListener(onMq);
     sync();
   })();
+  document.querySelectorAll('[data-rper]').forEach(b => b.addEventListener('click', () => { rper = b.dataset.rper; try{ sessionStorage.setItem('arcRper', rper); }catch(_){} renderRelatorios(); renderChart(); }));
+  ['rDe','rAte'].forEach(id => $(id).addEventListener('change', () => { renderRelatorios(); renderChart(); }));
+  try{ const v = sessionStorage.getItem('arcRper'); if(v && v !== 'periodo') rper = v; }catch(_){}
   // pedido vindo da calculadora de orçamento
   window.addEventListener('message', e => {
     if(e.origin !== location.origin || !e.data || e.data.type !== 'arcano:novo-pedido') return;
