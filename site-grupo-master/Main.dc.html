@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Grupo Master: início</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/grupo-master/tokens.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="gm {{themeClass}}" style="min-height: 100vh;">
+  <dc-import name="Header" theme="{{theme}}" on-toggle="{{toggleTheme}}" active="home" hint-size="100%,84px"></dc-import>
+
+  <main>
+    <!-- HERO -->
+    <!-- HERO: cartão arredondado com vídeo de fundo -->
+    <section class="vhero" aria-labelledby="hero-t">
+      <video class="vhero-media" ref="{{setVideo}}" src="assets/7aa2ebe95a4fd00c6743a978120880f6.mp4" poster="assets/0f30c4f00de67a941a6e49b0bf8d3726.jpg" autoPlay="{{yes}}" muted="{{yes}}" loop="{{yes}}" playsInline="{{yes}}" preload="auto" aria-hidden="true"></video>
+      <div class="vhero-shade" aria-hidden="true"></div>
+      <div class="vhero-in">
+        <p class="tag ld" style="margin: 0;">Segurança, operação e capacitação</p>
+        <h1 id="hero-t" class="vh-title ld ld-1">Soluções integradas para proteger, operar e <strong>fortalecer a sua empresa.</strong></h1>
+        <p class="vh-lead ld ld-2">Segurança contra incêndio, facilities, mão de obra terceirizada e capacitação profissional em um só grupo, com atuação em todo o Brasil.</p>
+        <div class="ld ld-3" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px;">
+          <a href="Orcamento.dc.html" class="btn btn-primary">Solicitar orçamento<span class="btn-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a>
+          <a href="https://wa.me/5524992514939?text=Ol%C3%A1%2C%20quero%20falar%20com%20a%20Master" class="btn btn-ghost"><svg class="fill wa" viewBox="0 0 24 24" aria-hidden="true" style="width: 18px; height: 18px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg>Falar no WhatsApp</a>
+        </div>
+        <div class="proof ld ld-4">
+          <span class="proof-dots" aria-hidden="true">
+            <span><img src="assets/54060b99582340462e7737892d4dac2f.png" alt=""></span>
+            <span><img src="assets/229696e193db9f41f23183520929418d.png" alt=""></span>
+            <span><img src="assets/f142893ca1e6379e7675d00425018db8.png" alt=""></span>
+            <span class="proof-plus">+1 mil</span>
+          </span>
+          <span class="proof-t"><strong>Mais de 1.000 clientes atendidos</strong> em 7 anos, com credenciamento no CBMERJ e registro no CREA.</span>
+        </div>
+      </div>
+      <button type="button" class="vh-play" onClick="{{toggleVideo}}" aria-label="{{videoLabel}}">
+        <sc-if value="{{playing}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"></path></svg></sc-if>
+        <sc-if value="{{paused}}" hint-placeholder-val="{{false}}"><svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5Z"></path></svg></sc-if>
+      </button>
+    </section>
+
+    <!-- NÚMEROS (contagem animada; valores provisórios) -->
+    <section class="wrap" aria-label="A Master em números" style="padding-top: 56px; padding-bottom: 88px;">
+      <div class="counters" ref="{{setCounters}}">
+        <sc-for list="{{counters}}" as="c" hint-placeholder-count="5">
+          <div class="counter">
+            <p class="counter-n"><em>{{c.prefix}}</em>{{c.value}}</p>
+            <p class="counter-l">{{c.label}}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- CLIENTES: faixa contínua que some no escuro -->
+    <section aria-labelledby="clientes-t" style="padding: 8px 0 104px;">
+      <p id="clientes-t" class="small" style="text-align: center; margin-bottom: 36px;">Empresas que confiam na Master</p>
+      <div class="marquee">
+        <div class="marquee-track">
+          <img class="client-logo" src="assets/6258a7e737a345a73d18782efbb178d2.png" alt="Bradesco">
+          <img class="client-logo" src="assets/62c18d15b85ce2326f0bbc496e48d415.png" alt="Sesc">
+          <img class="client-logo" src="assets/9ad49542c8eaffc175220fc56a2b094a.png" alt="Rede D'Or">
+          <img class="client-logo tall" src="assets/aa41a1b57f8f3694dc68026f31902999.png" alt="Rock in Rio">
+          <img class="client-logo" src="assets/981717ede46a00e7f0e2352ba0a47f0e.png" alt="Ambev">
+          <img class="client-logo tall" src="assets/65c6559f9f8f7267fbc2f0cab7750495.png" alt="Piracanjuba">
+          <img class="client-logo" src="assets/a78eacd967dbb4c4b90626b56c60a358.png" alt="Hospital Santa Teresa">
+          <img class="client-logo" src="assets/bd7055f2122caa70252dd23968eaf903.png" alt="Cervejaria Bohemia">
+          <img class="client-logo tall" src="assets/d7b5b2d35687cda64d0f295c16e7d004.png" alt="GE">
+          <img class="client-logo" src="assets/779b031f2e95bda88ad9d429819cec37.png" alt="Airspeed Aviation">
+          <img class="client-logo" src="assets/9dddded4b9a7882ad705d74813226d6e.png" alt="Grupo Petrópolis">
+          <img class="client-logo" src="assets/f9e36b15c8f202c2b52de30fe60d67f1.png" alt="SG4">
+          <img class="client-logo tall" src="assets/8656857d6c3cfc115e0f480a9fa5cccf.png" alt="Werner Tecidos">
+          <img class="client-logo tall" src="assets/2231dbfc9f322e09cce1345e2ad43b72.png" alt="Botafogo">
+          <img class="client-logo tall" src="assets/e0374e209213031bcb9a2fc9f5b441fa.png" alt="Fluminense">
+          <img class="client-logo tall" src="assets/56854613dce0273843516545854c8dea.png" alt="Duque de Caxias Futebol Clube">
+          <img class="client-logo tall" src="assets/ce953bbd142d0321c29f3c4c2cc5596b.png" alt="Petropolitano Futebol Clube">
+          <img class="client-logo" src="assets/6258a7e737a345a73d18782efbb178d2.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/62c18d15b85ce2326f0bbc496e48d415.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/9ad49542c8eaffc175220fc56a2b094a.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/aa41a1b57f8f3694dc68026f31902999.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/981717ede46a00e7f0e2352ba0a47f0e.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/65c6559f9f8f7267fbc2f0cab7750495.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/a78eacd967dbb4c4b90626b56c60a358.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/bd7055f2122caa70252dd23968eaf903.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/d7b5b2d35687cda64d0f295c16e7d004.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/779b031f2e95bda88ad9d429819cec37.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/9dddded4b9a7882ad705d74813226d6e.png" alt="" aria-hidden="true">
+          <img class="client-logo" src="assets/f9e36b15c8f202c2b52de30fe60d67f1.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/8656857d6c3cfc115e0f480a9fa5cccf.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/2231dbfc9f322e09cce1345e2ad43b72.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/e0374e209213031bcb9a2fc9f5b441fa.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/56854613dce0273843516545854c8dea.png" alt="" aria-hidden="true">
+          <img class="client-logo tall" src="assets/ce953bbd142d0321c29f3c4c2cc5596b.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUÇÕES (palco invertido) -->
+    <section class="stage-inv sec" aria-labelledby="sol-t">
+      <div class="wrap">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 56px;">
+          <div class="rv" style="display: flex; flex-direction: column;">
+            <p class="eyebrow">Soluções</p>
+            <h2 id="sol-t" class="h2">Três frentes de trabalho, <strong>uma equipe responsável.</strong></h2>
+          </div>
+          <p class="body rv" style="max-width: 38ch;">Cada empresa do grupo atua na sua especialidade. Você fala com um só time, do orçamento à entrega.</p>
+        </div>
+        <div class="g-3">
+          <a href="MasterFire.dc.html" class="sol rv">
+            <span style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.6 2.8 2.4 4.6 4 6.3 1.4 1.5 2.5 3 2.5 5.2A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-1.6.6-2.9 1.6-4 .3 1.6 1.2 2.7 2.4 3.2C9.2 10.6 10.2 6.4 12 3Z"></path></svg></span>
+              <span class="circle-arrow"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px;"><path d="M7 17 17 7M8 7h9v9"></path></svg></span>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 12px;">
+              <span class="h3">Master Fire</span>
+              <span class="body">Projetos, legalização, consultoria e terceirização especializada em prevenção e combate a incêndio.</span>
+            </span>
+            <span class="hair"></span>
+            <ul class="check-list">
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Projetos e legalização no Corpo de Bombeiros</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Brigada de incêndio e bombeiro civil</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Sistemas fixos de detecção e alarme</li>
+            </ul>
+          </a>
+          <a href="MasterFacility.dc.html" class="sol rv">
+            <span style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M10 21v-3h4v3"></path></svg></span>
+              <span class="circle-arrow"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px;"><path d="M7 17 17 7M8 7h9v9"></path></svg></span>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 12px;">
+              <span class="h3">Master Facility</span>
+              <span class="body">Serviços terceirizados para manter a rotina da sua operação funcionando.</span>
+            </span>
+            <span class="hair"></span>
+            <ul class="check-list">
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Limpeza e conservação</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Jardinagem</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Controlador de acesso e apoio operacional</li>
+            </ul>
+          </a>
+          <a href="Pratique.dc.html" class="sol rv">
+            <span style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"></path><path d="M7 11.2V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.8"></path></svg></span>
+              <span class="circle-arrow"><svg viewBox="0 0 24 24" aria-hidden="true" style="width: 16px; height: 16px;"><path d="M7 17 17 7M8 7h9v9"></path></svg></span>
+            </span>
+            <span style="display: flex; flex-direction: column; gap: 12px;">
+              <span class="h3">Pratique</span>
+              <span class="body">Cursos, treinamentos e capacitações profissionais com aula prática.</span>
+            </span>
+            <span class="hair"></span>
+            <ul class="check-list">
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Formação de bombeiro civil</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Primeiros socorros e brigada</li>
+              <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>NR10, NR33, NR35 e outras normas</li>
+            </ul>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUE A MASTER (bento) -->
+    <section class="sec" aria-labelledby="why-t" style="position: relative; overflow: hidden;">
+      <div class="wrap">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 56px;">
+          <div class="rv" style="display: flex; flex-direction: column;">
+            <p class="eyebrow">Por que a Master</p>
+            <h2 id="why-t" class="h2">O que você pode conferir <strong>antes de contratar.</strong></h2>
+          </div>
+          <a href="Registros.dc.html" class="link-arrow rv">Ver registros e certificados<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+        </div>
+        <div class="g-why">
+          <div class="tile why-a rv" style="display: flex; flex-direction: column; gap: 28px; padding: 36px;">
+            <img src="assets/54060b99582340462e7737892d4dac2f.png" alt="Selo do CBMERJ" style="width: 72px; height: 72px;">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <h3 class="h3">Credenciada no Corpo de Bombeiros do RJ</h3>
+              <p class="small">Quatro credenciamentos ativos no CBMERJ.</p>
+            </div>
+            <div style="display: grid; margin-top: auto;">
+              <div style="display: grid; grid-template-columns: 84px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line);"><span class="code grad-text">00-118</span><span style="color: var(--body); font-size: 15px;">Projetos contra incêndio</span></div>
+              <div style="display: grid; grid-template-columns: 84px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line);"><span class="code grad-text">02-494</span><span style="color: var(--body); font-size: 15px;">Manutenção e instalação de sistema fixo</span></div>
+              <div style="display: grid; grid-template-columns: 84px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line);"><span class="code grad-text">05-078</span><span style="color: var(--body); font-size: 15px;">Formação de brigada e de bombeiro civil</span></div>
+              <div style="display: grid; grid-template-columns: 84px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line);"><span class="code grad-text">06-188</span><span style="color: var(--body); font-size: 15px;">Terceirização de bombeiro civil</span></div>
+            </div>
+          </div>
+          <div class="tile why-b rv" style="padding: 0; min-height: 320px;">
+            <div class="xfade" aria-hidden="true">
+              <img src="assets/97ec8780fe50563f6d9853d370116d34.jpg" alt="">
+              <img src="assets/5d915f8b70f7ad0a1e7cb364f67f7450.jpg" alt="">
+              <img src="assets/a2d2706737c05a002d830645ea4de086.jpg" alt="">
+              <img src="assets/5d02cbfdf80a1c692c86fc77e6a0c14b.jpg" alt="">
+            </div>
+            <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.6) 45%, rgba(0,0,0,.05) 80%);"></div>
+            <div style="position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; padding: 36px; max-width: 460px; color: #ffffff;">
+              <span class="tag" style="margin: 0; background: rgba(0,0,0,.5); border-color: rgba(255,255,255,.2); color: rgba(255,255,255,.85);">Fabricação própria</span>
+              <h3 class="h3" style="color: #ffffff;">Corte e solda com equipe da casa, inclusive estruturas para túneis.</h3>
+            </div>
+          </div>
+          <div class="tile tile-b rv" style="display: flex; flex-direction: column; gap: 18px;">
+            <img class="logo" src="assets/229696e193db9f41f23183520929418d.png" alt="CREA-RJ" style="height: 34px; width: auto; filter: var(--logo-filter);">
+            <h3 class="h4" style="margin-top: auto;">Registro no CREA-RJ</h3>
+            <p class="small"><span class="code grad-text" style="font-size: 15px;">2022200932</span> para projetos e plantas.</p>
+          </div>
+          <div class="tile rv" style="display: flex; flex-direction: column; gap: 18px;">
+            <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+            <h3 class="h4" style="margin-top: auto;">Bombeiro civil em campo</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span class="chip">Hospitais</span><span class="chip">Indústrias</span><span class="chip">Eventos</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ONDE ATUAMOS: mapa interativo -->
+    <section class="sec" aria-labelledby="onde-t" style="position: relative; overflow: hidden; padding-top: 48px;">
+      <div class="wrap" style="position: relative;">
+        <div class="rv" style="display: flex; flex-direction: column; margin-bottom: 40px;">
+          <p class="eyebrow">Onde atuamos</p>
+          <h2 id="onde-t" class="h2">Presente em 11 estados, <strong>com sede em Petrópolis.</strong></h2>
+          <p class="body" style="margin-top: 16px;">Passe o mouse sobre o mapa ou a lista para ver cada estado.</p>
+        </div>
+        <dc-import name="Mapa" embedded="{{yes}}" hint-size="100%,640px"></dc-import>
+      </div>
+    </section>
+
+    <!-- CHAMADA FINAL -->
+    <section aria-label="Contato" style="padding-bottom: 128px;">
+      <div class="wrap">
+        <div class="cta-band rv">
+          <svg class="arcs" viewBox="0 0 800 800" aria-hidden="true" style="right: -220px; top: -260px; width: 800px; height: 800px; color: rgba(255,255,255,.22);"><circle cx="400" cy="400" r="160"></circle><circle cx="400" cy="400" r="240"></circle><circle cx="400" cy="400" r="320"></circle><circle cx="400" cy="400" r="395"></circle></svg>
+          <div style="position: relative; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 40px;">
+            <div style="display: flex; flex-direction: column; gap: 18px; max-width: 700px;">
+              <h2 class="h2" style="color: #ffffff;">Precisa regularizar ou proteger sua operação? <strong>Fale com a Master.</strong></h2>
+              <p class="lead" style="color: rgba(255,255,255,.88);">Conte o que você precisa e a equipe comercial retorna com a proposta.</p>
+            </div>
+            <div class="btn-row" style="display: flex; flex-wrap: wrap; gap: 12px;">
+              <a href="Orcamento.dc.html" class="btn btn-primary">Solicitar orçamento<span class="btn-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></span></a>
+              <a href="tel:+552420209694" class="btn btn-ghost">(24) 2020-9694</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dc-import name="Footer" theme="{{theme}}" embedded="{{yes}}" hint-size="100%,440px"></dc-import>
+
+  <dc-import name="Assistente" theme="{{theme}}" embedded="{{yes}}" hint-size="0px,0px"></dc-import>
+  <a href="https://wa.me/5524992514939?text=Ol%C3%A1%2C%20quero%20falar%20com%20a%20Master" class="fab" aria-label="Falar no WhatsApp"><svg class="fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"></path></svg></a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark","section":"Tema"},"$preview":{"width":1440,"height":5200}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { theme: null, p: 0, paused: false };
+    this.videoEl = null;
+    this.countersEl = null;
+    this.started = false;
+  }
+  componentDidMount() {
+    try {
+      const saved = window.localStorage.getItem('gm-theme');
+      if (saved === 'light' || saved === 'dark') this.setState({ theme: saved });
+    } catch (e) {}
+    let reduce = false;
+    try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+    if (reduce) { try { if (this.videoEl) this.videoEl.pause(); } catch (e) {} this.setState({ p: 1, paused: true }); return; }
+    const start = () => {
+      if (this.started) return;
+      this.started = true;
+      const t0 = performance.now();
+      const dur = 2200;
+      const tick = (now) => {
+        const k = Math.min(1, (now - t0) / dur);
+        this.setState({ p: 1 - Math.pow(1 - k, 4) });
+        if (k < 1) this.raf = requestAnimationFrame(tick);
+      };
+      this.raf = requestAnimationFrame(tick);
+    };
+    try {
+      if (this.countersEl && 'IntersectionObserver' in window) {
+        this.io = new IntersectionObserver((entries) => {
+          if (entries.some((en) => en.isIntersecting)) { start(); this.io.disconnect(); }
+        }, { threshold: 0.4 });
+        this.io.observe(this.countersEl);
+      } else { setTimeout(start, 500); }
+    } catch (e) { setTimeout(start, 500); }
+  }
+  componentWillUnmount() {
+    try { if (this.raf) cancelAnimationFrame(this.raf); if (this.io) this.io.disconnect(); } catch (e) {}
+  }
+  renderVals() {
+    const theme = this.state.theme || this.props.theme || 'dark';
+    const p = this.state.p || 0;
+    const fmt = (n) => Math.round(n * p).toLocaleString('pt-BR');
+    const data = [
+      { prefix: '', n: 7, label: 'anos de mercado' },
+      { prefix: '+', n: 1000, label: 'clientes atendidos' },
+      { prefix: '+', n: 600, label: 'colaboradores diretos e indiretos' },
+      { prefix: '+', n: 1200, label: 'projetos realizados' },
+      { prefix: '+', n: 10000, label: 'treinamentos realizados' }
+    ];
+    return {
+      theme: theme,
+      themeClass: theme === 'light' ? 't-light' : 't-dark',
+      yes: true,
+      counters: data.map((d) => ({ prefix: d.prefix, value: fmt(d.n), label: d.label })),
+      setCounters: (el) => { this.countersEl = el; },
+      setVideo: (el) => { this.videoEl = el; },
+      playing: !this.state.paused,
+      paused: !!this.state.paused,
+      videoLabel: this.state.paused ? 'Reproduzir vídeo' : 'Pausar vídeo',
+      toggleVideo: () => {
+        const v = this.videoEl;
+        if (!v) return;
+        try { if (v.paused) { v.play(); this.setState({ paused: false }); } else { v.pause(); this.setState({ paused: true }); } } catch (e) {}
+      },
+      toggleTheme: () => {
+        const next = theme === 'light' ? 'dark' : 'light';
+        try { window.localStorage.setItem('gm-theme', next); } catch (e) {}
+        this.setState({ theme: next });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

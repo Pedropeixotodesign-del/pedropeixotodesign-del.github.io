@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Mapa de atuação</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/grupo-master/tokens.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="font-family: var(--font-core); color: var(--fg);">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 48px; align-items: center;">
+    <div class="map-wrap" style="justify-self: center;">
+      <sc-if value="{{loaded}}" hint-placeholder-val="{{false}}">
+        <svg viewBox="0 0 613 639" role="img" aria-label="Mapa do Brasil com os estados onde o Grupo Master atua destacados">
+          <defs>
+            <linearGradient id="gm-map-grad" gradientUnits="userSpaceOnUse" x1="330" y1="140" x2="560" y2="520">
+              <stop offset="0" stop-color="#cc3e27"></stop>
+              <stop offset="1" stop-color="#008f93"></stop>
+            </linearGradient>
+          </defs>
+          <sc-for list="{{states}}" as="s" hint-placeholder-count="27">
+            <path d="{{s.d}}" class="{{s.cls}}" tabIndex="{{s.tab}}" aria-label="{{s.label}}" onMouseEnter="{{s.enter}}" onMouseLeave="{{leave}}" onFocus="{{s.enter}}" onBlur="{{leave}}" onClick="{{s.enter}}"></path>
+          </sc-for>
+          <circle class="map-ping" cx="490" cy="430" r="6"></circle>
+          <circle class="map-pin" cx="490" cy="430" r="3.5"></circle>
+        </svg>
+      </sc-if>
+      <sc-if value="{{hasTip}}" hint-placeholder-val="{{false}}">
+        <div class="map-tip" style="left: {{tipX}}; top: {{tipY}};" role="status">
+          <span style="display: block; font-weight: 500;">{{tipName}}</span>
+          <sc-if value="{{hasTipNote}}" hint-placeholder-val="{{false}}"><span style="display: block; font-size: 13px; color: var(--muted);">{{tipNote}}</span></sc-if>
+        </div>
+      </sc-if>
+    </div>
+    <div>
+      <p class="small" style="margin-bottom: 12px;">{{countLabel}}</p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2px 8px;">
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="11">
+          <button type="button" class="{{r.cls}}" onMouseEnter="{{r.enter}}" onMouseLeave="{{leave}}" onFocus="{{r.enter}}" onBlur="{{leave}}">
+            <span class="state-uf">{{r.uf}}</span>
+            <span style="display: flex; flex-direction: column; min-width: 0;">
+              <span style="font-weight: 500;">{{r.name}}</span>
+              <sc-if value="{{r.hasNote}}" hint-placeholder-val="{{false}}"><span style="font-size: 13px; color: var(--muted);">{{r.note}}</span></sc-if>
+            </span>
+            <span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 999px; background: linear-gradient(120deg, #cc3e27, #008f93);"></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"embedded":{"editor":null},"$preview":{"width":1280,"height":720}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { map: null, hot: null };
+  }
+  componentDidMount() {
+    try {
+      fetch('assets/9651260be38e8266d024811c2e6e10a5.json')
+        .then((r) => r.json())
+        .then((j) => this.setState({ map: j }))
+        .catch(() => {});
+    } catch (e) {}
+  }
+  renderVals() {
+    const order = ['rj', 'sp', 'mg', 'pr', 'ba', 'se', 'al', 'pe', 'pb', 'ce', 'ma'];
+    const fallback = {
+      rj: ['Rio de Janeiro', 'Sede em Petrópolis'], sp: ['São Paulo', ''], mg: ['Minas Gerais', ''],
+      pr: ['Paraná', ''], ba: ['Bahia', ''], se: ['Sergipe', ''],
+      al: ['Alagoas', ''], pe: ['Pernambuco', ''], pb: ['Paraíba', ''],
+      ce: ['Ceará', ''], ma: ['Maranhão', '']
+    };
+    const hot = this.state.hot;
+    const map = this.state.map;
+    const set = (id) => () => this.setState({ hot: id });
+    const states = map ? map.states.map((s) => ({
+      d: s.d,
+      cls: 'st' + (s.active ? ' st-on' : '') + (hot === s.id ? ' is-hot' : ''),
+      tab: s.active ? 0 : -1,
+      label: s.active && fallback[s.id] && fallback[s.id][1] ? s.name + ', ' + fallback[s.id][1] : s.name,
+      enter: s.active ? set(s.id) : () => {}
+    })) : [];
+    const hs = map && hot ? map.states.find((s) => s.id === hot) : null;
+    return {
+      rootClass: this.props.embedded ? '' : 'gm t-dark',
+      loaded: !!map,
+      states: states,
+      leave: () => this.setState({ hot: null }),
+      hasTip: !!hs,
+      tipName: hs ? hs.name : '',
+      tipNote: hot && fallback[hot] ? fallback[hot][1] : '',
+      hasTipNote: !!(hot && fallback[hot] && fallback[hot][1]),
+      tipX: hs ? (hs.cx / 613 * 100).toFixed(2) + '%' : '0%',
+      tipY: hs ? (hs.cy / 639 * 100).toFixed(2) + '%' : '0%',
+      countLabel: order.length + ' estados de atuação',
+      rows: order.map((id) => ({
+        uf: id.toUpperCase(),
+        name: fallback[id][0],
+        note: fallback[id][1],
+        hasNote: !!fallback[id][1],
+        cls: 'state-row' + (hot === id ? ' is-hot' : ''),
+        enter: set(id)
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

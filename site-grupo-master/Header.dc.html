@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cabeçalho do site</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/grupo-master/tokens.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="{{rootClass}}" style="height: 84px; background: transparent;" aria-hidden="true"></div>
+<header class="hdr {{rootClass}} {{barClass}}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; font-family: var(--font-core); color: var(--fg);">
+  <div class="wrap" style="height: 76px; display: flex; align-items: center; gap: 24px;">
+    <a href="Main.dc.html" aria-label="Grupo Master, página inicial" style="display: flex; align-items: center; flex: 1 1 0; min-width: 0; text-decoration: none;">
+      <sc-if value="{{isDark}}" hint-placeholder-val="{{true}}">
+        <img class="logo" src="ds/grupo-master/assets/logo/logo-horizontal-degrade-branco.png" alt="Grupo Master" style="height: 28px; width: auto;">
+      </sc-if>
+      <sc-if value="{{isLight}}" hint-placeholder-val="{{false}}">
+        <img class="logo" src="ds/grupo-master/assets/logo/logo-horizontal-degrade-preto.png" alt="Grupo Master" style="height: 28px; width: auto;">
+      </sc-if>
+    </a>
+
+    <nav class="hdr-nav hdr-pill" aria-label="Principal">
+      <div style="position: relative;">
+        <button type="button" class="hdr-link" aria-expanded="{{solExpanded}}" aria-controls="menu-solucoes" aria-current="{{curSol}}" onClick="{{toggleSol}}">Soluções<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+        <sc-if value="{{solOpen}}" hint-placeholder-val="{{false}}">
+          <div id="menu-solucoes" class="drop-in" style="position: absolute; top: calc(100% + 14px); left: -4px; width: 380px; padding: 8px; border-radius: 22px; background: var(--card); box-shadow: var(--shadow), inset 0 0 0 1px var(--line);">
+            <a href="MasterFire.dc.html" class="drop-item">
+              <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.6 2.8 2.4 4.6 4 6.3 1.4 1.5 2.5 3 2.5 5.2A6.5 6.5 0 0 1 12 21a6.5 6.5 0 0 1-6.5-6.5c0-1.6.6-2.9 1.6-4 .3 1.6 1.2 2.7 2.4 3.2C9.2 10.6 10.2 6.4 12 3Z"></path></svg></span>
+              <span><span style="display: block; font-weight: 500;">Master Fire</span><span style="display: block; font-size: 14px; color: var(--muted);">Projetos, legalização e brigada</span></span>
+            </a>
+            <a href="MasterFacility.dc.html" class="drop-item">
+              <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"></rect><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M10 21v-3h4v3"></path></svg></span>
+              <span><span style="display: block; font-weight: 500;">Master Facility</span><span style="display: block; font-size: 14px; color: var(--muted);">Serviços terceirizados</span></span>
+            </a>
+            <a href="Pratique.dc.html" class="drop-item">
+              <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 9 9-5 9 5-9 5-9-5Z"></path><path d="M7 11.2V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.8"></path></svg></span>
+              <span><span style="display: block; font-weight: 500;">Pratique</span><span style="display: block; font-size: 14px; color: var(--muted);">Cursos e treinamentos</span></span>
+            </a>
+          </div>
+        </sc-if>
+      </div>
+      <a href="QuemSomos.dc.html" class="hdr-link" aria-current="{{curQuem}}">Quem somos</a>
+      <a href="Registros.dc.html" class="hdr-link" aria-current="{{curReg}}">Registros</a>
+      <a href="TrabalheConosco.dc.html" class="hdr-link" aria-current="{{curTrab}}">Trabalhe conosco</a>
+    </nav>
+
+    <div style="flex: 1 1 0; display: flex; justify-content: flex-end; align-items: center; gap: 8px;">
+      <a href="https://www.intranet-grupo-maste.com/" target="_blank" rel="noopener" class="icon-btn hdr-util has-tip" aria-label="Intranet" data-tip="Intranet"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="16" height="10" x="4" y="11" rx="2"></rect><path d="M8 11V7.5a4 4 0 0 1 8 0V11"></path></svg></a>
+      <button type="button" class="icon-btn" aria-label="{{themeLabel}}" title="{{themeLabel}}" onClick="{{toggleTheme}}">
+        <sc-if value="{{isDark}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"></path></svg></sc-if>
+        <sc-if value="{{isLight}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"></path></svg></sc-if>
+      </button>
+      <a href="Orcamento.dc.html" class="btn btn-primary btn-sm hdr-cta">Solicitar orçamento</a>
+      <button type="button" class="icon-btn hdr-burger" style="display: none;" aria-label="{{menuLabel}}" aria-expanded="{{menuExpanded}}" aria-controls="menu-mobile" onClick="{{toggleMenu}}">
+        <sc-if value="{{menuClosed}}" hint-placeholder-val="{{true}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16"></path></svg></sc-if>
+        <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></sc-if>
+      </button>
+    </div>
+  </div>
+
+  <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+    <nav id="menu-mobile" class="drop-in" aria-label="Menu" style="background: var(--bg); border-bottom: 1px solid var(--line);">
+      <div class="wrap" style="padding-top: 8px; padding-bottom: 28px; display: flex; flex-direction: column; gap: 2px;">
+        <p class="small" style="padding: 8px 0 4px;">Soluções</p>
+        <a href="MasterFire.dc.html" class="hdr-link" style="font-size: 20px; padding: 0;">Master Fire</a>
+        <a href="MasterFacility.dc.html" class="hdr-link" style="font-size: 20px; padding: 0;">Master Facility</a>
+        <a href="Pratique.dc.html" class="hdr-link" style="font-size: 20px; padding: 0;">Pratique</a>
+        <div class="hair" style="margin: 12px 0;"></div>
+        <a href="QuemSomos.dc.html" class="hdr-link" style="font-size: 20px; padding: 0;">Quem somos</a>
+        <a href="Registros.dc.html" class="hdr-link" style="font-size: 20px; padding: 0;">Registros e certificados</a>
+        <a href="TrabalheConosco.dc.html" class="hdr-link" style="font-size: 20px; padding: 0;">Trabalhe conosco</a>
+        <a href="https://www.intranet-grupo-maste.com/" target="_blank" rel="noopener" class="hdr-link" style="font-size: 16px; padding: 0; color: var(--muted);">Intranet</a>
+        <a href="Orcamento.dc.html" class="btn btn-primary" style="margin-top: 16px;">Solicitar orçamento</a>
+      </div>
+    </nav>
+  </sc-if>
+</header>
+<sc-if value="{{standalone}}" hint-placeholder-val="{{false}}">
+  <div class="{{rootClass}}" aria-hidden="true" style="height: 316px; background: var(--bg);"></div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"active":{"editor":"enum","options":["home","solucoes","quem","registros","trabalhe","orcamento"],"default":"home"},"onToggle":{"editor":null},"$preview":{"width":1440,"height":400}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { solOpen: false, menuOpen: false, localTheme: null, scrolled: false };
+    this.onScroll = this.onScroll.bind(this);
+  }
+  onScroll(e) {
+    let y = 0;
+    try {
+      const t = e && e.target && e.target.scrollTop !== undefined ? e.target.scrollTop : 0;
+      y = Math.max(window.scrollY || 0, (document.scrollingElement && document.scrollingElement.scrollTop) || 0, t || 0);
+    } catch (err) {}
+    const s = y > 24;
+    if (s !== this.state.scrolled) this.setState({ scrolled: s });
+  }
+  componentDidMount() {
+    try { window.addEventListener('scroll', this.onScroll, { passive: true, capture: true }); } catch (e) {}
+  }
+  componentWillUnmount() {
+    try { window.removeEventListener('scroll', this.onScroll, { capture: true }); } catch (e) {}
+  }
+  renderVals() {
+    const theme = this.props.onToggle ? (this.props.theme || 'dark') : (this.state.localTheme || this.props.theme || 'dark');
+    const isDark = theme !== 'light';
+    const active = this.props.active || 'home';
+    const cur = (k) => (active === k ? 'page' : undefined);
+    const solOpen = !!this.state.solOpen;
+    const menuOpen = !!this.state.menuOpen;
+    return {
+      rootClass: this.props.onToggle ? '' : (isDark ? 'gm t-dark' : 'gm t-light'),
+      barClass: (this.state.scrolled || this.state.menuOpen || this.state.solOpen) ? 'hdr-bar is-scrolled' : 'hdr-bar',
+      isDark: isDark,
+      isLight: !isDark,
+      standalone: !this.props.onToggle,
+      themeLabel: isDark ? 'Ativar modo claro' : 'Ativar modo escuro',
+      solOpen: solOpen,
+      solExpanded: solOpen ? 'true' : 'false',
+      menuOpen: menuOpen,
+      menuClosed: !menuOpen,
+      menuExpanded: menuOpen ? 'true' : 'false',
+      menuLabel: menuOpen ? 'Fechar menu' : 'Abrir menu',
+      curSol: cur('solucoes'),
+      curQuem: cur('quem'),
+      curReg: cur('registros'),
+      curTrab: cur('trabalhe'),
+      toggleSol: () => this.setState({ solOpen: !this.state.solOpen }),
+      toggleMenu: () => this.setState({ menuOpen: !this.state.menuOpen }),
+      toggleTheme: () => {
+        if (this.props.onToggle) { this.props.onToggle(); return; }
+        this.setState({ localTheme: isDark ? 'light' : 'dark' });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

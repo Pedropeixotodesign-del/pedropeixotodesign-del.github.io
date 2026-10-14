@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Assistente virtual</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="ds/grupo-master/tokens.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div class="{{rootClass}}">
+  <sc-if value="{{standalone}}" hint-placeholder-val="{{false}}">
+    <div aria-hidden="true" style="height: 720px; background: var(--bg);"></div>
+  </sc-if>
+  <div class="ast">
+    <sc-if value="{{showHint}}" hint-placeholder-val="{{true}}">
+      <div class="ast-hint" role="status">
+        <button type="button" class="ast-hint-body" onClick="{{openChat}}"><strong>Oi! Eu sou o {{name}},</strong> assistente 24h da Master. Tire suas dúvidas por aqui.</button>
+        <button type="button" class="ast-hint-x" onClick="{{dismissHint}}" aria-label="Fechar aviso"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+      </div>
+    </sc-if>
+
+    <button type="button" class="ast-launch {{launchClass}}" onClick="{{toggle}}" aria-label="{{launchLabel}}" aria-expanded="{{expanded}}">
+      <img src="assets/23b264a5c528356376b7cfac5e66d4f4.png" alt="">
+      <span class="ast-dot" aria-hidden="true"></span>
+    </button>
+
+    <section class="ast-panel {{panelClass}}" role="dialog" aria-label="Assistente virtual da Master" aria-hidden="{{hidden}}">
+      <header class="ast-head">
+        <span class="ast-head-av"><img src="assets/23b264a5c528356376b7cfac5e66d4f4.png" alt=""><span class="ast-dot" aria-hidden="true"></span></span>
+        <span class="ast-head-t">
+          <strong>{{name}} <span class="ast-status"><span class="ast-online" aria-hidden="true"></span>Online</span></strong>
+          <span>Assistente 24h da Master</span>
+        </span>
+        <button type="button" class="ast-close" onClick="{{closeChat}}" aria-label="Fechar conversa"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+      </header>
+
+      <div class="ast-msgs" ref="{{setList}}" aria-live="polite">
+        <sc-for list="{{messages}}" as="m" hint-placeholder-count="2">
+          <sc-if value="{{m.isBot}}" hint-placeholder-val="{{true}}">
+            <div class="ast-row bot">
+              <img class="ast-av" src="assets/23b264a5c528356376b7cfac5e66d4f4.png" alt="">
+              <div class="ast-bub">
+                <span class="ast-txt">{{m.text}}</span>
+                <sc-if value="{{m.hasLinks}}" hint-placeholder-val="{{false}}">
+                  <span class="ast-links">
+                    <sc-for list="{{m.links}}" as="l">
+                      <a class="ast-link {{l.cls}}" href="{{l.href}}" target="{{l.target}}" rel="noopener">{{l.label}}<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg></a>
+                    </sc-for>
+                  </span>
+                </sc-if>
+              </div>
+            </div>
+            <sc-if value="{{m.hasChips}}" hint-placeholder-val="{{false}}">
+              <div class="ast-chips">
+                <sc-for list="{{m.chips}}" as="c">
+                  <button type="button" class="ast-chip" onClick="{{c.pick}}">{{c.label}}</button>
+                </sc-for>
+              </div>
+            </sc-if>
+          </sc-if>
+          <sc-if value="{{m.isMe}}" hint-placeholder-val="{{false}}">
+            <div class="ast-row me"><div class="ast-bub">{{m.text}}</div></div>
+          </sc-if>
+        </sc-for>
+        <sc-if value="{{typing}}" hint-placeholder-val="{{false}}">
+          <div class="ast-row bot">
+            <img class="ast-av" src="assets/23b264a5c528356376b7cfac5e66d4f4.png" alt="">
+            <div class="ast-bub ast-typing" aria-label="{{name}} está digitando"><i></i><i></i><i></i></div>
+          </div>
+        </sc-if>
+      </div>
+
+      <form class="ast-form" onSubmit="{{send}}">
+        <input class="ast-input" type="text" value="{{draft}}" onInput="{{onInput}}" onKeyDown="{{onKey}}" placeholder="Digite sua dúvida" enterKeyHint="send" aria-label="Digite sua dúvida" autocomplete="off" maxlength="300">
+        <button class="ast-send" type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+      </form>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"theme":{"editor":"enum","options":["dark","light"],"default":"dark"},"embedded":{"editor":null},"$preview":{"width":1280,"height":720}}'>
+const WA = 'https://wa.me/5524992514939?text=';
+const LINKS = {
+  orcamento: { label: 'Solicitar orçamento', href: 'Orcamento.dc.html' },
+  fire: { label: 'Conhecer a Master Fire', href: 'MasterFire.dc.html' },
+  facility: { label: 'Conhecer a Master Facility', href: 'MasterFacility.dc.html' },
+  cursos: { label: 'Ver cursos da Pratique', href: 'Pratique.dc.html#cursos' },
+  pratique: { label: 'Conhecer a Pratique', href: 'Pratique.dc.html' },
+  registros: { label: 'Ver registros e certificados', href: 'Registros.dc.html' },
+  quem: { label: 'Quem somos', href: 'QuemSomos.dc.html' },
+  vagas: { label: 'Ver vagas abertas', href: 'TrabalheConosco.dc.html#vagas' },
+  curriculo: { label: 'Enviar currículo', href: 'mailto:dpcurriculomaster@gmail.com?subject=Banco%20de%20talentos' },
+  privacidade: { label: 'Política de privacidade', href: 'Privacidade.dc.html' },
+  ligar: { label: 'Ligar (24) 2020-9694', href: 'tel:+552420209694' },
+  wa: { label: 'Falar no WhatsApp', href: WA + encodeURIComponent('Olá, vim pelo site da Master'), ext: true, wa: true }
+};
+const FAQ = [
+  { id: 'grupo', q: 'O que o Grupo Master faz?', cat: 'grupo',
+    k: ['grupo master', 'o que faz', 'o que voces fazem', 'o que a master faz', 'sobre a master', 'sobre o grupo', 'quem sao', 'quem e o grupo', 'quem e a master', 'ha quanto tempo', 'existem', 'anos de mercado', 'quantos clientes', 'clientes', 'historia', 'fundad'],
+    a: 'O Grupo Master reúne soluções integradas em segurança contra incêndio, facilities, mão de obra terceirizada e capacitação profissional. São 7 anos de mercado, mais de 1.000 clientes atendidos, mais de 1.200 projetos e mais de 10.000 treinamentos realizados, com sede em Petrópolis (RJ).', l: ['quem', 'orcamento'] },
+  { id: 'empresas', q: 'Quais empresas fazem parte do grupo?', cat: 'grupo',
+    k: ['empresas do grupo', 'fazem parte', 'marcas', 'master fire', 'master facility', 'quais empresas', 'empresas voces tem'],
+    a: 'São três frentes:\n• Master Fire: projetos, legalização, sistemas e bombeiro civil.\n• Master Facility: limpeza, jardinagem, controle de acesso e apoio operacional.\n• Pratique: cursos, treinamentos e NRs com aula prática.', l: ['fire', 'facility', 'pratique'] },
+  { id: 'impacto', q: 'A Impacto Fire faz parte do grupo?', cat: 'grupo',
+    k: ['impacto', 'impacto fire'],
+    a: 'Não. A Impacto Fire é uma empresa independente e não faz parte do Grupo Master. Por aqui eu respondo sobre a Master Fire, a Master Facility e a Pratique.', l: ['quem'] },
+  { id: 'legalizacao', q: 'Vocês regularizam empresas no Corpo de Bombeiros?', cat: 'fire',
+    k: ['legaliz', 'regulariz', 'regularizar minha empresa', 'regularizar a empresa', 'adequar', 'adequacao', 'irregular', 'projeto', 'projeto de incendio', 'projeto contra incendio', 'projeto de combate', 'pscip', 'corpo de bombeiros', 'aprovacao', 'aprovar', 'alvara', 'licenc', 'vistoria', 'imovel', 'documentac', 'cbmerj', 'exigencia', 'notific', 'multa', 'interdi', 'fiscaliz', 'laudo', 'engenheiro', 'liberac', 'liberar', 'autoriz', 'habite-se', 'abrir um', 'abrir uma', 'inaugur', 'normas de incendio', 'norma de incendio'],
+    a: 'Sim, o Grupo Master regulariza a sua empresa no Corpo de Bombeiros (CBMERJ) pela Master Fire: fazemos a vistoria técnica, o projeto de segurança contra incêndio e pânico, as adequações necessárias e a tramitação do AVCB, acompanhando tudo até a aprovação.', l: ['orcamento', 'fire'] },
+  { id: 'avcb', q: 'O que é o AVCB e como funciona a regularização?', cat: 'fire',
+    k: ['avcb', 'auto de vistoria', 'certificado de aprovacao', 'como funciona', 'etapas', 'processo', 'passo a passo', 'o que e avcb'],
+    a: 'O AVCB é o documento que comprova que o imóvel atende às normas de segurança contra incêndio. A regularização com a Master tem quatro etapas:\n1. Vistoria técnica do local\n2. Projeto conforme as normas do estado\n3. Execução das instalações e da sinalização\n4. Acompanhamento até a aprovação', l: ['orcamento'] },
+  { id: 'renovacao', q: 'Vocês renovam o AVCB?', cat: 'fire',
+    k: ['renov', 'vencido', 'venceu', 'vencer', 'vencimento', 'expirou', 'validade do avcb'],
+    a: 'Sim. Quando o AVCB está perto de vencer ou já venceu, a Master Fire faz a vistoria, as adequações que o imóvel precisar e a tramitação da renovação no Corpo de Bombeiros.', l: ['orcamento', 'wa'] },
+  { id: 'prazo', q: 'Quanto tempo leva a regularização?', cat: 'fire',
+    k: ['prazo', 'quanto tempo', 'demora', 'demorado', 'demorar', 'dias', 'fica pronto', 'rapido', 'urgente', 'urgencia'],
+    a: 'Depende do tipo de imóvel, da área construída e do que precisa ser instalado. Depois da vistoria técnica a equipe informa o prazo e o orçamento.', l: ['orcamento', 'wa'] },
+  { id: 'preco', q: 'Quanto custa um serviço?', cat: 'contato',
+    k: ['preco', 'valor', 'custa', 'custo', 'cobram', 'cobra', 'quanto e', 'quanto fica', 'tabela', 'barato', 'pagamento', 'parcel'],
+    a: 'O valor depende do serviço, do tamanho e do tipo do local. Conte o que você precisa no formulário de orçamento e a equipe comercial retorna com a proposta.', l: ['orcamento', 'wa'] },
+  { id: 'bombeiro', q: 'Vocês terceirizam bombeiro civil?', cat: 'fire',
+    k: ['bombeiro civil', 'bombeiros civis', 'terceirizacao de bombeiro', 'terceirizar bombeiro', 'bombeiros terceirizados', 'contratar bombeiro', 'escala', 'plantao', 'posto de bombeiro', 'bombeiro', 'brigadista para', 'fornecem brigadista', 'brigadista', 'contratar brigadista'],
+    a: 'Sim. A Master Fire fornece bombeiros civis para hospitais, indústrias, comércio, edifícios e eventos, com escala e supervisão da Master. Credenciamento CBMERJ 06-188.', l: ['orcamento', 'fire'] },
+  { id: 'brigada', q: 'Vocês formam e treinam brigada de incêndio?', cat: 'fire',
+    k: ['brigada', 'brigadista', 'simulado', 'abandono', 'evacuacao', 'plano de emergencia', 'nbr 14276', '14276'],
+    a: 'Sim. Formamos brigadistas conforme a ABNT NBR 14276 e fazemos simulados de abandono e de combate a princípio de incêndio para testar o plano de emergência da empresa. Credenciamento CBMERJ 05-078.', l: ['orcamento', 'cursos'] },
+  { id: 'sistemas', q: 'Vocês instalam e fazem manutenção de sistemas de incêndio?', cat: 'fire',
+    k: ['sprinkler', 'hidrante', 'alarme', 'deteccao', 'detector', 'fumaca', 'manutenc', 'instalac', 'sistema', 'casa de maquinas', 'casa de bombas', 'bomba', 'mangueira', 'preventiva', 'corretiva', 'quebrado', 'conserto', 'reparo', 'defeito'],
+    a: 'Sim. Instalamos e mantemos sprinklers, hidrantes, casas de máquinas e sistemas de detecção e alarme, com manutenção preventiva e corretiva e adequações industriais. Credenciamento CBMERJ 02-494.', l: ['orcamento', 'fire'] },
+  { id: 'sinalizacao', q: 'Vocês fazem sinalização e rota de fuga?', cat: 'fire',
+    k: ['sinaliz', 'rota de fuga', 'placa', 'saida de emergencia', 'fotoluminesc', 'iluminacao de emergencia', 'luz de emergencia', 'it-20', '16820'],
+    a: 'Sim. Fazemos o projeto de rota de fuga e a sinalização fotoluminescente conforme a ABNT NBR 16820 e a IT-20, com material antichama e autoextinguível.', l: ['orcamento'] },
+  { id: 'extintor', q: 'Vocês vendem ou recarregam extintores?', cat: 'fire',
+    k: ['extintor', 'extintores', 'recarga', 'recarregar', 'equipamento', 'comprar', 'vender', 'vendem', 'produto'],
+    a: 'Para extintores e outros equipamentos, fale com a equipe: ela indica a solução certa para o seu imóvel, junto com a instalação, a manutenção e a sinalização.', l: ['wa', 'orcamento'] },
+  { id: 'eventos', q: 'Vocês atendem eventos?', cat: 'fire',
+    k: ['evento', 'show', 'festa', 'festival', 'ambulancia', 'posto medico', 'jogo', 'estadio', 'publico'],
+    a: 'Sim. Para eventos a Master leva bombeiros civis, atendimento de primeiros socorros, posto médico e locação de ambulância. Já atendemos grandes eventos e clubes de futebol.', l: ['orcamento', 'wa'] },
+  { id: 'fabricacao', q: 'Vocês fabricam peças e estruturas?', cat: 'fire',
+    k: ['fabric', 'solda', 'corte e solda', 'estrutura', 'estruturas metalicas', 'tunel', 'tuneis', 'oficina', 'metal', 'serralher', 'peca'],
+    a: 'Sim. A Master tem oficina e equipe própria de corte e solda, que produz peças e estruturas usadas nos projetos, inclusive sistemas de incêndio para túneis.', l: ['fire', 'orcamento'] },
+  { id: 'facility', q: 'Quais serviços a Master Facility oferece?', cat: 'facility',
+    k: ['facility', 'facilities', 'limpeza', 'jardin', 'jardim', 'portaria', 'porteiro', 'controlador de acesso', 'controle de acesso', 'recepc', 'conservac', 'mao de obra', 'terceiriz', 'apoio operacional', 'servicos gerais', 'zelador', 'zeladoria', 'faxin', 'diarista', 'servente', 'auxiliar de limpeza', 'copeira', 'camareira'],
+    a: 'A Master Facility cuida de limpeza e conservação, jardinagem, controle de acesso e apoio operacional, em um só contrato. Dá para somar brigada, bombeiro civil e treinamentos da Master Fire e da Pratique, com um único ponto de contato.', l: ['facility', 'orcamento'] },
+  { id: 'cursos', q: 'Quais cursos a Pratique oferece?', cat: 'pratique',
+    k: ['curso', 'cursos', 'pratique', 'treinamento', 'capacitac', 'aula', 'aprender', 'estudar', 'nr', 'nr5', 'nr6', 'nr10', 'nr11', 'nr23', 'nr33', 'nr35', 'cipa', 'epi', 'empilhadeira', 'normas regulamentadoras', 'trabalho em altura', 'espaco confinado', 'primeiros socorros', 'combate a incendio'],
+    a: 'A Pratique oferece formação de bombeiro civil, brigada de incêndio, primeiros socorros, combate a incêndio e as NRs 5 (CIPA), 6 (EPI), 10, 11, 23, 33 e 35, sempre com aula prática.', l: ['cursos', 'wa'] },
+  { id: 'cursobc', q: 'Como faço o curso de bombeiro civil?', cat: 'pratique',
+    k: ['curso de bombeiro', 'formacao de bombeiro', 'ser bombeiro', 'virar bombeiro', 'quero ser bombeiro', 'me tornar bombeiro', 'inscric', 'inscrev', 'matricul', 'turma', 'proxima turma'],
+    a: 'A formação de bombeiro civil da Pratique tem aulas de combate a incêndio, salvamento e primeiros socorros, com prática em estrutura de treinamento real. Para saber datas e fazer a inscrição, chame a equipe no WhatsApp.', l: ['cursos', 'wa'] },
+  { id: 'cursoformato', q: 'Como são as aulas da Pratique?', cat: 'pratique',
+    k: ['online', 'ead', 'a distancia', 'presencial', 'onde sao as aulas', 'local do curso', 'onde e o curso', 'duracao', 'carga horaria', 'quantas horas', 'quantos dias', 'horario das aulas'],
+    a: 'As aulas da Pratique têm parte prática em estrutura própria de treinamento. Carga horária, datas, local e formato variam de curso para curso: a equipe passa tudo pelo WhatsApp.', l: ['wa', 'cursos'] },
+  { id: 'cursopreco', q: 'Quanto custa um curso da Pratique?', cat: 'pratique',
+    k: ['valor do curso', 'preco do curso', 'quanto custa o curso', 'mensalidade', 'investimento do curso'],
+    a: 'O valor depende do curso e do formato (turma aberta ou turma fechada para empresa). Chame a equipe no WhatsApp para receber valores e próximas datas.', l: ['wa', 'cursos'] },
+  { id: 'certificado', q: 'Os cursos têm certificado?', cat: 'pratique',
+    k: ['certificado', 'diploma', 'validade', 'valido', 'reconhecid', 'carteirinha', 'verificac'],
+    a: 'Sim. Todo curso da Pratique emite certificado digital com assinatura e folha de verificação.', l: ['cursos'] },
+  { id: 'empresas-cursos', q: 'A Pratique faz treinamento para empresas?', cat: 'pratique',
+    k: ['turma fechada', 'treinar', 'treinamento para empresa', 'treinamento para minha empresa', 'curso para empresa', 'curso para minha empresa', 'treinamento para funcionarios', 'treinamento para meus funcionarios', 'para minha equipe', 'minha equipe', 'funcionarios', 'colaboradores', 'in company'],
+    a: 'Sim. A Pratique monta turmas fechadas para empresas, com o conteúdo e a carga horária que cada norma exige.', l: ['orcamento', 'cursos'] },
+  { id: 'estados', q: 'Em quais estados vocês atuam?', cat: 'grupo',
+    k: ['estado', 'estados', 'cidade', 'regiao', 'onde atuam', 'atendem em', 'atende em', 'atuam em', 'atuam no', 'atendem no', 'tem em', 'estao em', 'filial', 'unidade', 'brasil', 'nordeste', 'sudeste', 'sul',
+      'rio de janeiro', 'rio', 'niteroi', 'petropolis', 'teresopolis', 'sao paulo', 'campinas', 'minas', 'minas gerais', 'belo horizonte', 'juiz de fora', 'parana', 'curitiba', 'bahia', 'salvador', 'sergipe', 'aracaju', 'alagoas', 'maceio', 'pernambuco', 'recife', 'paraiba', 'joao pessoa', 'ceara', 'fortaleza', 'maranhao', 'sao luis',
+      'goias', 'goiania', 'espirito santo', 'vitoria', 'santa catarina', 'rio grande', 'distrito federal', 'brasilia', 'amazonas', 'manaus', 'piaui', 'teresina', 'mato grosso', 'tocantins'],
+    a: 'A sede fica em Petrópolis (RJ) e a Master atua em 11 estados: Rio de Janeiro, São Paulo, Minas Gerais, Paraná, Bahia, Sergipe, Alagoas, Pernambuco, Paraíba, Ceará e Maranhão. Para outra região, fale com a equipe.', l: ['quem', 'wa'] },
+  { id: 'credenciamento', q: 'A Master é credenciada?', cat: 'grupo',
+    k: ['credenc', 'credenciada no corpo de bombeiros', 'registro', 'crea', 'habilitad', 'confiavel', 'idone', 'certificac', 'abnt', 'selo'],
+    a: 'Sim. A Master Fire tem quatro credenciamentos no Corpo de Bombeiros do RJ (00-118, 02-494, 05-078 e 06-188) e registro no CREA-RJ (2022200932).', l: ['registros'] },
+  { id: 'orcamento', q: 'Como peço um orçamento?', cat: 'contato',
+    k: ['orcamento', 'cotacao', 'cotar', 'proposta', 'contratar', 'contrato', 'quero contratar', 'fechar', 'visita tecnica'],
+    a: 'É rápido: preencha o formulário de orçamento ou chame a equipe no WhatsApp. Conte o tipo de local, a cidade e o serviço que você precisa.', l: ['orcamento', 'wa'] },
+  { id: 'contato', q: 'Qual é o telefone e o endereço?', cat: 'contato',
+    k: ['telefone', 'endereco', 'contato', 'email', 'e-mail', 'whatsapp', 'zap', 'ligar', 'numero', 'localizacao', 'onde fica', 'onde voces ficam', 'ficam', 'sede', 'falar com', 'atendente', 'humano', 'pessoa'],
+    a: 'Central de relacionamento:\n• Telefone (24) 2020-9694\n• WhatsApp (24) 99251-4939\n• engenharia@masterfirerj.com.br\n• Av. Barão do Rio Branco, 2.786, Centro, Petrópolis (RJ)', l: ['wa', 'ligar'] },
+  { id: 'horario', q: 'Qual o horário de atendimento?', cat: 'contato',
+    k: ['horario', 'abre', 'abrem', 'que horas', 'funcionamento', 'sabado', 'domingo', 'feriado', 'expediente'],
+    a: 'Por aqui eu respondo 24h. Para falar com a equipe, chame no WhatsApp ou ligue (24) 2020-9694: a central informa o horário de atendimento e retorna o seu contato.', l: ['wa', 'ligar'] },
+  { id: 'vagas', q: 'Como trabalhar no Grupo Master?', cat: 'carreira',
+    k: ['vaga', 'vagas', 'emprego', 'trabalhar', 'trabalhe conosco', 'curriculo', 'banco de talentos', 'oportunidade', 'rh', 'recrutamento', 'contratando', 'selecao'],
+    a: 'As vagas abertas ficam na página Trabalhe conosco, cada uma com um código. Envie o currículo para dpcurriculomaster@gmail.com com o código no assunto. Se não houver vaga para a sua área, mande com o assunto "Banco de talentos".', l: ['vagas', 'curriculo'] },
+  { id: 'instrutor', q: 'Quero ser instrutor da Pratique', cat: 'carreira',
+    k: ['instrutor', 'dar aula', 'professor', 'lecionar', 'ensinar', 'ministrar'],
+    a: 'Que bom! A Pratique busca instrutores para formação de bombeiro civil, brigada, primeiros socorros e NRs. Envie o currículo com o assunto "Instrutor Pratique".', l: ['curriculo', 'pratique'] },
+  { id: 'dados', q: 'Como vocês tratam meus dados?', cat: 'grupo',
+    k: ['dados', 'privacidade', 'cookies', 'lgpd', 'dpo', 'encarregado', 'excluir meus dados'],
+    a: 'Os dados são tratados conforme a LGPD. Na política de privacidade você encontra seus direitos e o contato do encarregado de dados (contato@masterfirerj.com.br).', l: ['privacidade'] }
+];
+const CATS = [
+  { label: 'Legalização e AVCB', id: 'legalizacao' },
+  { label: 'Bombeiro civil e brigada', id: 'bombeiro' },
+  { label: 'Sistemas e manutenção', id: 'sistemas' },
+  { label: 'Facilities', id: 'facility' },
+  { label: 'Cursos da Pratique', id: 'cursos' },
+  { label: 'Trabalhe conosco', id: 'vagas' }
+];
+const STARTERS = [
+  { label: 'Regularizar minha empresa nos Bombeiros', id: 'legalizacao' },
+  { label: 'Bombeiro civil para minha empresa', id: 'bombeiro' },
+  { label: 'Cursos da Pratique', id: 'cursos' },
+  { label: 'Pedir orçamento', id: 'orcamento' }
+];
+const STOP = new Set('a o os as um uma uns umas de do da dos das e ou em no na nos nas para pro por com sem que se me te eu voce voces ele ela isso esse essa este esta aqui ai la sim nao tem ter ser estar sou estao qual quais como quando onde porque meu minha meus minhas seu sua seus suas nosso nossa ao aos tambem mais muito pouco ja so mesmo gostaria queria quero preciso precisa saber informacao informacoes duvida ola oi bom boa dia tarde noite favor obrigado obrigada fazem faz fazer vou vai pode podem consigo conseguir'.split(' '));
+const ABBR = [[/\bvcs\b/g, 'voces'], [/\bvc\b/g, 'voce'], [/\bpq\b/g, 'porque'], [/\boq\b/g, 'o que'], [/\bpra\b/g, 'para'], [/\bpro\b/g, 'para o'], [/\btb\b/g, 'tambem'], [/\bta\b/g, 'esta'], [/\bq\b/g, 'que'], [/\bbh\b/g, 'belo horizonte'], [/\brj\b/g, 'rio de janeiro'], [/\bsp\b/g, 'sao paulo'], [/\bmg\b/g, 'minas gerais'], [/\bnr\s*-?\s*(\d+)/g, 'nr$1'], [/\bbonbeir/g, 'bombeir'], [/isar\b/g, 'izar'], [/isacao\b/g, 'izacao'], [/isad(o|a)\b/g, 'izad$1'], [/isando\b/g, 'izando'], [/\bcurriculum\b/g, 'curriculo']];
+const norm = (s) => {
+  let t = String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+  for (const [re, to] of ABBR) t = t.replace(re, to);
+  return t;
+};
+const stem = (w) => w.length > 4 ? w.replace(/(oes|aes)$/, 'ao').replace(/(es|s)$/, '') : w;
+function lev(a, b) {
+  if (Math.abs(a.length - b.length) > 2) return 9;
+  const m = a.length, n = b.length; let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) { const cur = [i]; for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); prev = cur; }
+  return prev[n];
+}
+const FAQN = FAQ.map((f) => ({ ...f, kn: f.k.map(norm), qn: norm(f.q).split(' ').filter((w) => w.length > 3 && !STOP.has(w)).map(stem) }));
+const BOOST = [
+  { re: /(regulariz|legaliz|pscip|cbmerj|alvara|notific|multa|interdi|fiscaliz|laudo|irregular|adequar|adequacao)/, ids: { legalizacao: 3, avcb: 1 } },
+  { re: /\bavcb\b|auto de vistoria/, ids: { avcb: 2, legalizacao: 1.5 } },
+  { re: /(o que e|o que significa|como funciona|etapas)/, ids: { avcb: 1.5 } },
+  { re: /(renov|venc|expir)/, ids: { renovacao: 5 } },
+  { re: /(vaga|emprego|curricul|contratando|trabalhar (ai|aqui|na|com|no)|trabalhe conosco|banco de talentos)/, ids: { vagas: 4 } },
+  { re: /(instrutor|dar aula|professor)/, ids: { instrutor: 6 } },
+  { re: /(ser bombeiro|virar bombeiro|tornar bombeiro|curso de bombeiro|formacao de bombeiro|formar bombeiro|formar como bombeiro|me formar)/, ids: { cursobc: 5 } },
+  { re: /(quantas horas|carga horaria|duracao|quanto tempo dura|quantos dias|quantas aulas|online|presencial|ead)/, ids: { cursoformato: 4 } },
+  { re: /certific(?!ado de aprovacao)/, ids: { certificado: 3 } },
+  { re: /certificado de aprovacao/, ids: { legalizacao: 3, avcb: 2 } },
+  { re: /((dos|nos|pelos|aos|com os|junto aos|junto ao|do|no|pelo) (corpo de )?bombeiros?\b(?! civi))/, ids: { legalizacao: 2 } },
+  { re: /(inscri|inscrev|matric|proxima turma|nova turma)/, ids: { cursobc: 3 } },
+  { re: /(quanto custa|valor|preco|mensalidade)/, ids: { preco: 1 } },
+  { re: /(horario|\babrem?\b|\bfecham?\b|sabado|domingo|feriado|expediente|que horas)/, ids: { horario: 4 } },
+  { re: /(tunel|tuneis|solda)/, ids: { fabricacao: 2 } },
+  { re: /(credenc|habilitad|registro|crea\b|confiavel|idone)/, ids: { credenciamento: 3 } },
+  { re: /(extintor)/, ids: { extintor: 3 } },
+  { re: /(atende|atuam|tem em|estao em|filial|unidade)/, ids: { estados: 1.5 } },
+  { re: /(evento|show|festa|festival)/, ids: { eventos: 2 } },
+  { re: /(online|ead|a distancia|presencial|duracao|carga horaria|onde sao as aulas)/, ids: { cursoformato: 3 } }
+];
+function score(text) {
+  const t = ' ' + norm(text) + ' ';
+  const toks = t.trim().split(' ').filter((w) => (w.length > 2 || /^nr\d*$/.test(w)) && !STOP.has(w));
+  const st = toks.map(stem);
+  const isCourse = /(curso|trein|aula|capacit|nr\d*\b|pratique|certific|instrut|turma|aprender|formac|inscri|inscrev|matric|ser bombeiro|virar bombeiro|tornar bombeiro|formar bombeiro|me formar)/.test(t);
+  const isPrice = /(quanto custa|quanto sai|quanto fica|quanto e o|valor|preco|mensalidade|cobram|orcamento de quanto)/.test(t);
+  const instit = /((dos|nos|pelos|aos|com os|junto aos|junto ao|do|no|pelo) (corpo de )?bombeiros?\b(?! civi))|corpo de bombeiros/.test(t) && !/bombeiros? civi/.test(t);
+  const res = FAQN.map((f) => {
+    let s = 0;
+    for (const kw of f.kn) {
+      if (kw.includes(' ')) { if (t.includes(' ' + kw + ' ') || t.includes(' ' + kw)) s += 3; continue; }
+      const ks = stem(kw);
+      for (let i = 0; i < toks.length; i++) {
+        const w = toks[i], ws = st[i];
+        if (w === kw || ws === ks) { s += 2.2; break; }
+        if (kw.length >= 4 && (w.startsWith(kw) || (w.length >= 5 && kw.startsWith(w)))) { s += 2; break; }
+        if (kw.length >= 5 && w.length >= 5 && lev(ws, ks) <= (ks.length >= 8 ? 2 : 1)) { s += 1.6; break; }
+      }
+    }
+    for (const w of st) if (f.qn.includes(w)) s += 0.3;
+    for (const b of BOOST) if (b.ids[f.id] && b.re.test(t)) s += b.ids[f.id];
+    if (f.id === 'cursopreco' && isPrice && isCourse) s += 8;
+    if (f.id === 'preco' && isPrice && !isCourse) s += 4;
+    if (isPrice && (f.id === 'legalizacao' || f.id === 'avcb')) s *= 0.6;
+    if (instit && f.id === 'bombeiro') s *= 0.3;
+    if (f.id === 'bombeiro' && /(ser bombeiro|virar bombeiro|tornar bombeiro|formar bombeiro|me formar|curso de bombeiro|formacao de bombeiro)/.test(t)) s *= 0.5;
+    if (f.id === 'horario' && isCourse) s *= 0.3;
+    if (f.id === 'estados' && /certific/.test(t) && !/(atende|atuam|trabalham em)/.test(t)) s *= 0.4;
+    if (f.cat === 'pratique' && !isCourse && f.id !== 'cursoformato') s *= 0.4;
+    if (f.id === 'cursoformato' && !isCourse && !/(online|ead|presencial|aulas)/.test(t)) s *= 0.5;
+    return { f, s };
+  }).sort((a, b) => b.s - a.s);
+  return preferService(res);
+}
+function preferService(r) {
+  if (r[0] && (r[0].f.id === 'orcamento') ) {
+    const i = r.findIndex((x) => x.s >= 2 && ['fire', 'facility', 'pratique'].includes(x.f.cat));
+    if (i > 0) { const [svc] = r.splice(i, 1); r.unshift(svc); }
+  }
+  return r;
+}
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: false, draft: '', typing: false, misses: 0, hint: false, hintClosed: false, msgs: [] };
+    this.list = null;
+    this.timers = [];
+  }
+  componentDidMount() {
+    let closed = false;
+    try { closed = window.sessionStorage.getItem('gm-ast-hint') === '1'; } catch (e) {}
+    if (!closed) this.timers.push(setTimeout(() => { if (!this.state.open) this.setState({ hint: true }); }, 1800));
+    this.setState({ msgs: [this.botMsg('Oi! Eu sou o Max, assistente 24h da Master. Posso responder dúvidas sobre legalização, bombeiro civil, facilities, cursos e vagas. Escolha um assunto ou escreva sua pergunta.', [], STARTERS.map((c) => ({ label: c.label, id: c.id })))] });
+  }
+  componentWillUnmount() { this.timers.forEach((t) => clearTimeout(t)); }
+  componentDidUpdate() {
+    const el = this.list;
+    if (el && this.state.open) { try { el.scrollTop = el.scrollHeight; } catch (e) {} }
+  }
+  botMsg(text, links, chips, extra) { return Object.assign({ from: 'bot', text: text, links: links || [], chips: chips || [] }, extra || {}); }
+  related(f) {
+    const same = FAQ.filter((x) => x.cat === f.cat && x.id !== f.id).slice(0, 3);
+    return same.map((x) => ({ label: x.q, id: x.id }));
+  }
+  answerFaq(f, alt) {
+    let chips = this.related(f);
+    if (alt && alt.id !== f.id) chips = [{ label: alt.q, id: alt.id }].concat(chips.filter((c) => c.id !== alt.id)).slice(0, 3);
+    return { msg: this.botMsg(f.a, f.l, chips), misses: 0 };
+  }
+  reply(text) {
+    const n = norm(text);
+    if (/^(oi|ola|bom dia|boa tarde|boa noite|e ai|opa|hey|hello)\b/.test(n) && n.split(' ').length <= 3) {
+      return { msg: this.botMsg('Olá! Como posso ajudar? Você pode escrever sua pergunta ou escolher um assunto.', [], STARTERS), misses: this.state.misses };
+    }
+    if (/^(obrigad|valeu|vlw|brigad|show|otimo|perfeito|ok|beleza)/.test(n) && n.split(' ').length <= 4) {
+      return { msg: this.botMsg('Por nada! Se surgir outra dúvida, é só escrever por aqui.', ['wa'], []), misses: 0 };
+    }
+    const r = score(text);
+    const best = r[0];
+    if (best && best.s >= 2) {
+      const alt = r[1] && r[1].s >= Math.max(2.5, best.s * 0.7) ? r[1].f : null;
+      return this.answerFaq(best.f, alt);
+    }
+    const misses = this.state.misses + 1;
+    if (best && best.s > 0.9 && misses < 2) {
+      const opts = r.filter((x) => x.s > 0).slice(0, 3).map((x) => ({ label: x.f.q, id: x.f.id }));
+      return { msg: this.botMsg('Acho que entendi em parte. Sua dúvida é sobre algum destes assuntos?', [], opts), misses: misses };
+    }
+    if (misses < 2) {
+      return { msg: this.botMsg('Não entendi bem, desculpe. Sobre qual assunto é a sua dúvida?', [], CATS), misses: misses };
+    }
+    const wa = { label: 'Falar com a equipe', href: WA + encodeURIComponent('Olá! Vim pelo site e tenho uma dúvida: ' + text), ext: true, wa: true };
+    return { msg: this.botMsg('Essa eu prefiro passar para a nossa equipe, que responde rapidinho. É só tocar no botão abaixo que a sua pergunta já vai junto.', [wa], CATS.slice(0, 3)), misses: 0 };
+  }
+  push(userText, resolver) {
+    const msgs = this.state.msgs.concat([{ from: 'me', text: userText }]);
+    this.setState({ msgs: msgs, draft: '', typing: true });
+    this.timers.push(setTimeout(() => {
+      const out = resolver();
+      this.setState({ msgs: this.state.msgs.concat([out.msg]), typing: false, misses: out.misses });
+    }, 650));
+  }
+  ask(text) {
+    const t = String(text || '').trim();
+    if (!t || this.state.typing) return;
+    this.push(t, () => this.reply(t));
+  }
+  pickFaq(id, label) {
+    if (this.state.typing) return;
+    const f = FAQ.find((x) => x.id === id);
+    if (!f) return;
+    this.push(label, () => this.answerFaq(f));
+  }
+  closeHint() {
+    try { window.sessionStorage.setItem('gm-ast-hint', '1'); } catch (e) {}
+    this.setState({ hint: false, hintClosed: true });
+  }
+  renderVals() {
+    const theme = this.props.theme || 'dark';
+    const open = !!this.state.open;
+    const msgs = this.state.msgs || [];
+    const last = msgs.length - 1;
+    return {
+      name: 'Max',
+      rootClass: this.props.embedded ? '' : (theme === 'light' ? 'gm t-light' : 'gm t-dark'),
+      standalone: !this.props.embedded,
+      showHint: !!this.state.hint && !open && !this.state.hintClosed,
+      launchClass: open ? 'is-open' : '',
+      panelClass: open ? 'is-open' : '',
+      launchLabel: open ? 'Fechar o assistente virtual' : 'Abrir o assistente virtual Max',
+      expanded: open ? 'true' : 'false',
+      hidden: open ? 'false' : 'true',
+      typing: !!this.state.typing,
+      draft: this.state.draft,
+      waLink: LINKS.wa.href,
+      messages: msgs.map((m, i) => {
+        const links = (m.links || []).map((l) => {
+          const o = typeof l === 'string' ? LINKS[l] : l;
+          return { label: o.label, href: o.href, target: o.ext ? '_blank' : '_self', cls: o.wa ? 'is-wa' : '' };
+        });
+        const chips = i === last ? (m.chips || []).map((c) => ({ label: c.label, pick: () => this.pickFaq(c.id, c.label) })) : [];
+        return { isBot: m.from === 'bot', isMe: m.from === 'me', text: m.text, links: links, hasLinks: links.length > 0, chips: chips, hasChips: chips.length > 0 };
+      }),
+      setList: (el) => { this.list = el; },
+      toggle: () => { this.setState({ open: !open, hint: false }); },
+      openChat: () => { this.setState({ open: true, hint: false }); },
+      closeChat: () => { this.setState({ open: false }); },
+      dismissHint: () => this.closeHint(),
+      onInput: (e) => { this.setState({ draft: e && e.target ? e.target.value : '' }); },
+      onKey: (e) => {
+        if (e && (e.key === 'Enter' || e.keyCode === 13) && !e.shiftKey && !(e.nativeEvent && e.nativeEvent.isComposing)) {
+          try { e.preventDefault(); } catch (x) {}
+          const v = e.target && typeof e.target.value === 'string' ? e.target.value : this.state.draft;
+          this.ask(v);
+        }
+      },
+      send: (e) => { try { e.preventDefault(); } catch (x) {} this.ask(this.state.draft); }
+    };
+  }
+}
+</script>
+</body>
+</html>
